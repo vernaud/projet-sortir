@@ -1,19 +1,65 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sortir.com{% endblock title %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+</head>
+<body>
+<div id="container">
+    <header>
+        <div id="logo">
+            <a class="site-title" href="{{ url('default_home') }}" title="Bucket-List | Home">
+                <img id="imglogo" src="{{ asset('img/logoSortir.png') }}" alt="Bucket-List">
+            </a>
+        </div>
+        <nav id="menu">
+            <ul>
+                <li><a href="#">Ville</a></li>
+                <li><a href="#">Campus</a></li>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Mon profil</a></li>
+                <li><a href="#">Se déconnecter</a></li>
+                <li><a href="#">Se connecter</a></li>
+            </ul>
+        </nav>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+
+        <div id="wrapper">
+            <form id="form1">
+                <input type="checkbox" name="burger" id="burger"/>
+                <label for="burger" id="menu-burger">
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </label>
+
+                <div id="contenu">
+                    <nav id="menuResp">
+                        <ul>
+                            <li><a href="#">Ville</a></li>
+                            <li><a href="#">Campus</a></li>
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Mon profil</a></li>
+                            <li><a href="#">Se déconnecter</a></li>
+                            <li><a href="#">Se connecter</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </form>
+        </div>
+
+
+        </header>
+
+    {% block main %}{% endblock main %}
+    <footer>
+        <p>© {{ "now"|date("Y") }} Sortir.com</p>
+    </footer>
+</div>
+
+{% block javascripts %}{% endblock javascripts %}
+</body>
 </html>
