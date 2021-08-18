@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,37 +43,9 @@ class Sortie
     private $nbInscriptionsMax;
 
     /**
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="text")
      */
     private $infosSortie;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="Sortie")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Etat;
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getEtat(): ArrayCollection
-    {
-        return $this->Etat;
-    }
-
-    public function setEtat(Etat $Etat): self
-    {
-        $this->Etat = $Etat;
-
-        return $this;
-    }
-
-
-
-    public function __construct()
-    {
-        $this->Etat = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -149,29 +120,6 @@ class Sortie
     public function setInfosSortie(string $infosSortie): self
     {
         $this->infosSortie = $infosSortie;
-
-        return $this;
-    }
-
-
-    public function addEtat(self $etat): self
-    {
-        if (!$this->Etat->contains($etat)) {
-            $this->Etat[] = $etat;
-            $etat->setEtat($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtat(self $etat): self
-    {
-        if ($this->Etat->removeElement($etat)) {
-            // set the owning side to null (unless already changed)
-            if ($etat->getEtat() === $this) {
-                $etat->setEtat(null);
-            }
-        }
 
         return $this;
     }

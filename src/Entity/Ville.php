@@ -27,11 +27,6 @@ class Ville
      */
     private $codePostal;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="Ville")
-     */
-    private $Lieu;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -57,18 +52,6 @@ class Ville
     public function setCodePostal(string $codePostal): self
     {
         $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-    public function getLieu(): ?Lieu
-    {
-        return $this->Lieu;
-    }
-
-    public function setLieu(?Lieu $Lieu): self
-    {
-        $this->Lieu = $Lieu;
 
         return $this;
     }
