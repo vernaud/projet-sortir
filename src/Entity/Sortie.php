@@ -55,6 +55,28 @@ class Sortie
      */
     private $Etat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sortie::class, inversedBy="Lieu")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Lieu;
+
+    /**
+     * @return mixed
+     */
+    public function getLieu()
+    {
+        return $this->Lieu;
+    }
+
+    /**
+     * @param mixed $Lieu
+     */
+    public function setLieu($Lieu): void
+    {
+        $this->Lieu = $Lieu;
+    }
+
     public function __construct()
     {
         $this->Etat = new ArrayCollection();

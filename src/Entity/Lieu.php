@@ -44,9 +44,16 @@ class Lieu
      */
     private $Ville;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="Lieu")
+     */
+    private $Sortie;
+
     public function __construct()
     {
         $this->Ville = new ArrayCollection();
+        $this->Sortie = new ArrayCollection();
+        $this->lieu = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +133,77 @@ class Lieu
             // set the owning side to null (unless already changed)
             if ($ville->getLieu() === $this) {
                 $ville->setLieu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLieu(): ?self
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?self $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getSortie(): Collection
+    {
+        return $this->Sortie;
+    }
+
+    public function addSortie(self $sortie): self
+    {
+        if (!$this->Sortie->contains($sortie)) {
+            $this->Sortie[] = $sortie;
+            $sortie->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortie(self $sortie): self
+    {
+        if ($this->Sortie->removeElement($sortie)) {
+            // set the owning side to null (unless already changed)
+            if ($sortie->getLieu() === $this) {
+                $sortie->setLieu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setSortie(?self $Sortie): self
+    {
+        $this->Sortie = $Sortie;
+
+        return $this;
+    }
+
+    public function addLieu(self $lieu): self
+    {
+        if (!$this->lieu->contains($lieu)) {
+            $this->lieu[] = $lieu;
+            $lieu->setSortie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLieu(self $lieu): self
+    {
+        if ($this->lieu->removeElement($lieu)) {
+            // set the owning side to null (unless already changed)
+            if ($lieu->getSortie() === $this) {
+                $lieu->setSortie(null);
             }
         }
 
