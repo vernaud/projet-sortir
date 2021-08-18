@@ -100,11 +100,6 @@ label {
     cursor:pointer;
 }
 
-
-input[type="checkbox"] {
-    display:none;
-}
-
 #contenu {
     display:flex;
     align-items:center;
