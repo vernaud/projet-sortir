@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +29,7 @@ class Sortie
     private $dateHeureDebut;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $duree;
 
@@ -50,32 +49,27 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sortie::class, inversedBy="Etat")
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="Sortie")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sortie::class, inversedBy="Lieu")
-     * @ORM\JoinColumn(nullable=false)
+     * @return ArrayCollection
      */
-    private $Lieu;
-
-    /**
-     * @return mixed
-     */
-    public function getLieu()
+    public function getEtat(): ArrayCollection
     {
-        return $this->Lieu;
+        return $this->Etat;
     }
 
-    /**
-     * @param mixed $Lieu
-     */
-    public function setLieu($Lieu): void
+    public function setEtat(Etat $Etat): self
     {
-        $this->Lieu = $Lieu;
+        $this->Etat = $Etat;
+
+        return $this;
     }
+
+
 
     public function __construct()
     {
@@ -111,12 +105,12 @@ class Sortie
         return $this;
     }
 
-    public function getDuree(): ?\DateTimeInterface
+    public function getDuree(): ?int
     {
         return $this->duree;
     }
 
-    public function setDuree(\DateTimeInterface $duree): self
+    public function setDuree(int $duree): self
     {
         $this->duree = $duree;
 
@@ -159,17 +153,6 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?self
-    {
-        return $this->Etat;
-    }
-
-    public function setEtat(?self $Etat): self
-    {
-        $this->Etat = $Etat;
-
-        return $this;
-    }
 
     public function addEtat(self $etat): self
     {
@@ -189,18 +172,6 @@ class Sortie
                 $etat->setEtat(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSortie(): ?Etat
-    {
-        return $this->Sortie;
-    }
-
-    public function setSortie(?Etat $Sortie): self
-    {
-        $this->Sortie = $Sortie;
 
         return $this;
     }
