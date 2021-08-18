@@ -25,7 +25,8 @@ class Etat
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="Sortie")
+     *
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="etat")
      */
     private $Sortie;
 
@@ -59,25 +60,5 @@ class Etat
         return $this->Sortie;
     }
 
-    public function addSortie(Sortie $sortie): self
-    {
-        if (!$this->Sortie->contains($sortie)) {
-            $this->Sortie[] = $sortie;
-            $sortie->setSortie($this);
-        }
 
-        return $this;
-    }
-
-    public function removeSortie(Sortie $sortie): self
-    {
-        if ($this->Sortie->removeElement($sortie)) {
-            // set the owning side to null (unless already changed)
-            if ($sortie->getSortie() === $this) {
-                $sortie->setSortie(null);
-            }
-        }
-
-        return $this;
-    }
 }
