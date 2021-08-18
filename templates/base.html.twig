@@ -21,8 +21,14 @@
                 <li><a href="#">Campus</a></li>
                 <li><a href="#">Accueil</a></li>
                 <li><a href="#">Mon profil</a></li>
-                <li><a href="#">Se déconnecter</a></li>
-                <li><a href="#">Se connecter</a></li>
+
+                {% if app.user %}
+                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                {% endif %}
+
+                {% if not app.user %}
+                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                {% endif %}
             </ul>
         </nav>
 
@@ -43,8 +49,12 @@
                             <li><a href="#">Campus</a></li>
                             <li><a href="#">Accueil</a></li>
                             <li><a href="#">Mon profil</a></li>
-                            <li><a href="#">Se déconnecter</a></li>
-                            <li><a href="#">Se connecter</a></li>
+                            {% if app.user %}
+                                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                            {% endif %}
+                            {% if not app.user %}
+                                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
