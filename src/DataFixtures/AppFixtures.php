@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -19,6 +20,18 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        // Les Campus
+        $campus= new Campus();
+        $campus->setNom('Saint-Herblain');
+        $manager->persist($campus);
+        $campus= new Campus();
+        $campus->setNom('Chartres de Bretagne');
+        $manager->persist($campus);
+        $campus= new Campus();
+        $campus->setNom('La Roche sur Yon');
+        $manager->persist($campus);
+
+        // 1 Participant
         $participant = new Participant();
         $participant->setNom('DELORD');
         $participant->setPrenom('Matthieu');
@@ -31,9 +44,10 @@ class AppFixtures extends Fixture
         ));
         $participant->setRoles(['ROLE_USER']);
         $participant->setActif(true);
-
+        $participant->setCampus($campus);
         $manager->persist($participant);
 
+        // insertion
         $manager->flush();
     }
 }
