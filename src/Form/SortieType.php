@@ -11,6 +11,7 @@ class SortieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // todo compléter en ajoutant les types de champs et les options
         $builder
             ->add('nom')
             ->add('dateHeureDebut')
@@ -19,6 +20,8 @@ class SortieType extends AbstractType
             ->add('nbInscriptionsMax')
             ->add('infosSortie')
 //            ->add('etat')
+        /*todo form les jointures*/
+
 //            ->add('lieu')
 //            ->add('campus')
 //            ->add('organisateur')
