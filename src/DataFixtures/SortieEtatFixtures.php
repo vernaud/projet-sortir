@@ -11,10 +11,13 @@ class SortieEtatFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
+        // todo refaire la fixture sorties pour correspondre aux modifs des entités
+
         // $product = new Product();
 
         // Les Etats
-        $etat = new Etat();
+        /*$etat = new Etat();
         $etat->setLibelle('Créée');
         $manager->persist($etat);
         $etat = new Etat();
@@ -65,6 +68,6 @@ class SortieEtatFixtures extends Fixture
         $sortie->setEtat($etat);
         $manager->persist($sortie);
 
-        $manager->flush();
+        $manager->flush();*/
     }
 }
