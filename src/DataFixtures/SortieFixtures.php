@@ -7,38 +7,16 @@ use App\Entity\Sortie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class SortieEtatFixtures extends Fixture
+class SortieFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
 
         // todo refaire la fixture sorties pour correspondre aux modifs des entités
 
-        // $product = new Product();
-
-        // Les Etats
-        /*$etat = new Etat();
-        $etat->setLibelle('Créée');
-        $manager->persist($etat);
-        $etat = new Etat();
-        $etat->setLibelle('Ouverte');
-        $manager->persist($etat);
-        $etat = new Etat();
-        $etat->setLibelle('Clôturée');
-        $manager->persist($etat);
-        $etat = new Etat();
-        $etat->setLibelle('En Cours');
-        $manager->persist($etat);
-        $etat = new Etat();
-        $etat->setLibelle('Passée');
-        $manager->persist($etat);
-        $etat = new Etat();
-        $etat->setLibelle('Annulée');
-        $manager->persist($etat);
-
         // Les Sorties
 
-        $sortie = new Sortie();
+        /*$sortie = new Sortie();
         $sortie->setNom('Philo');
         $sortie->setDateHeureDebut(new \DateTime("2018-07-19 23:45:00"));
         $sortie->setDuree(90);

@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Participant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -30,6 +31,26 @@ class AppFixtures extends Fixture
         $campus= new Campus();
         $campus->setNom('La Roche sur Yon');
         $manager->persist($campus);
+
+        // Les Etats
+        $etat = new Etat();
+        $etat->setLibelle('Créée');
+        $manager->persist($etat);
+        $etat = new Etat();
+        $etat->setLibelle('Ouverte');
+        $manager->persist($etat);
+        $etat = new Etat();
+        $etat->setLibelle('Clôturée');
+        $manager->persist($etat);
+        $etat = new Etat();
+        $etat->setLibelle('En Cours');
+        $manager->persist($etat);
+        $etat = new Etat();
+        $etat->setLibelle('Passée');
+        $manager->persist($etat);
+        $etat = new Etat();
+        $etat->setLibelle('Annulée');
+        $manager->persist($etat);
 
         // 1 Participant
         $participant = new Participant();
