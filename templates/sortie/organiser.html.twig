@@ -4,5 +4,11 @@
 
 {% block main %}
     <h1>Organiser une sortie</h1>
-    {{ form(sortieForm) }}
+    {{ form_start(sortieForm) }}
+        {{ form_widget(sortieForm) }}
+        <a href="{{ url('default_home') }}">Annuler</a>
+    {{ form_end(sortieForm) }}
+
+    {# todo ajouter les boutons enregistrement et annuler #}
+    {# todo afficher un message de réussite sur la page suivante #}
 {% endblock %}
