@@ -23,7 +23,7 @@ class Etat
      * @ORM\Column(type="string", length=15)
      */
     private $libelle;
-
+// todo set default sur insert Sortie.Etat.libelle
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="etat")
      */
