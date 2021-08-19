@@ -87,9 +87,12 @@ footer {
     padding:10px;
 }
 
+#burger {
+    display: none;
+}
 
 /* Style des contenus */
-label {
+#form1 label {
     background:#FFFFFF;
     display:block;
     padding:5px;
@@ -98,11 +101,6 @@ label {
     font-weight:bold;
     border-radius:2px;
     cursor:pointer;
-}
-
-
-input[type="checkbox"] {
-    display:none;
 }
 
 #contenu {

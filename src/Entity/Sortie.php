@@ -30,7 +30,7 @@ class Sortie
     private $dateHeureDebut;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $duree;
 
@@ -45,19 +45,42 @@ class Sortie
     private $nbInscriptionsMax;
 
     /**
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="text")
      */
     private $infosSortie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sortie::class, inversedBy="Etat")
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Etat;
+    private $etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lieu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organisateur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Participant::class, mappedBy="inscriptions")
+     */
+    private $participants;
 
     public function __construct()
     {
-        $this->Etat = new ArrayCollection();
+        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,12 +112,12 @@ class Sortie
         return $this;
     }
 
-    public function getDuree(): ?\DateTimeInterface
+    public function getDuree(): ?int
     {
         return $this->duree;
     }
 
-    public function setDuree(\DateTimeInterface $duree): self
+    public function setDuree(int $duree): self
     {
         $this->duree = $duree;
 
@@ -137,48 +160,77 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?self
+    public function getEtat(): ?Etat
     {
-        return $this->Etat;
+        return $this->etat;
     }
 
-    public function setEtat(?self $Etat): self
+    public function setEtat(?Etat $etat): self
     {
-        $this->Etat = $Etat;
+        $this->etat = $etat;
 
         return $this;
     }
 
-    public function addEtat(self $etat): self
+    public function getLieu(): ?Lieu
     {
-        if (!$this->Etat->contains($etat)) {
-            $this->Etat[] = $etat;
-            $etat->setEtat($this);
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?Participant
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?Participant $organisateur): self
+    {
+        $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->addInscription($this);
         }
 
         return $this;
     }
 
-    public function removeEtat(self $etat): self
+    public function removeParticipant(Participant $participant): self
     {
-        if ($this->Etat->removeElement($etat)) {
-            // set the owning side to null (unless already changed)
-            if ($etat->getEtat() === $this) {
-                $etat->setEtat(null);
-            }
+        if ($this->participants->removeElement($participant)) {
+            $participant->removeInscription($this);
         }
-
-        return $this;
-    }
-
-    public function getSortie(): ?Etat
-    {
-        return $this->Sortie;
-    }
-
-    public function setSortie(?Etat $Sortie): self
-    {
-        $this->Sortie = $Sortie;
 
         return $this;
     }

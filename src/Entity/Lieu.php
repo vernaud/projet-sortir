@@ -25,28 +25,34 @@ class Lieu
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $rue;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ville::class, mappedBy="Lieu")
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieux")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Ville;
+    private $ville;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="lieu")
+     */
+    private $sorties;
 
     public function __construct()
     {
-        $this->Ville = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,7 +89,7 @@ class Lieu
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude): self
+    public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
 
@@ -95,37 +101,49 @@ class Lieu
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude): self
+    public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Ville[]
-     */
-    public function getVille(): Collection
+    public function getVille(): ?Ville
     {
-        return $this->Ville;
+        return $this->ville;
     }
 
-    public function addVille(Ville $ville): self
+    public function setVille(?Ville $ville): self
     {
-        if (!$this->Ville->contains($ville)) {
-            $this->Ville[] = $ville;
-            $ville->setLieu($this);
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
+    }
+
+    public function addSorty(Sortie $sorty): self
+    {
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+            $sorty->setLieu($this);
         }
 
         return $this;
     }
 
-    public function removeVille(Ville $ville): self
+    public function removeSorty(Sortie $sorty): self
     {
-        if ($this->Ville->removeElement($ville)) {
+        if ($this->sorties->removeElement($sorty)) {
             // set the owning side to null (unless already changed)
-            if ($ville->getLieu() === $this) {
-                $ville->setLieu(null);
+            if ($sorty->getLieu() === $this) {
+                $sorty->setLieu(null);
             }
         }
 

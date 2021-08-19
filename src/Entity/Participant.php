@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,6 +67,16 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
+     */
+    private $inscriptions;
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -223,6 +235,30 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Sortie $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Sortie $inscription): self
+    {
+        $this->inscriptions->removeElement($inscription);
 
         return $this;
     }
