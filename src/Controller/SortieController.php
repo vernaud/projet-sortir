@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\Etat;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,7 +36,18 @@ class SortieController extends AbstractController
         // Traitement du formulaire s'il est soumis
         if ($sortieForm->isSubmitted() ){
             $em = $this->getDoctrine()->getManager();
-            $sortie->setOrganisateur($this->getUser());
+            $participantRepository=$em->getRepository(Participant::class);
+            $etatRepository=$em->getRepository(Etat::class);
+            $campusRepository=$em->getRepository(Campus::class);
+
+            $participant= $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
+            $sortie->setOrganisateur($participant);
+            $sortie->setCampus($participant->getCampus());
+
+            $etat= $etatRepository->findOneBy(['libelle'=>'Créée']);
+            $sortie->setEtat($etat);
+
+
             $em->persist($sortie);
             $em->flush();
 
