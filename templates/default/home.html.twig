@@ -1,9 +1,86 @@
 {% extends "base.html.twig" %}
 
 {% block title %}{{ parent() }} - Accueil{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{{ asset('css/home.css') }}">{% endblock style %}
 
 {% block main %}
+    <div class="container">
+        <div>
+            <div id="infoJour">
+                <p id="dateProfil"><span>{{ "now"|date("d/m/Y") }}</span><i class="far fa-calendar-alt iconProfil"></i></p>
+                {% if app.user %}
+                <p id="userProfil"><span>{{ app.user.pseudo }}</span><i class="fas fa-user-alt iconProfil"></i></p>
+                {% endif %}
+            </div>
+            {{ form_start(formRecherche) }}
+            <div id="contentFormulaire">
+                <h4>Filtrer les sorties</h4>
+                <div id="colGauche">
+                    <div id="campus">
+                        <div id="labelCampus">{{ form_label(formRecherche.campus) }}</div>
+                        <div id="inputCampus">{{ form_widget(formRecherche.campus) }}</div>
+                    </div>
+                    <div id="recherche">
+                        <div id="inputRecherche">
+                            {{ form_widget(formRecherche.search) }}<i class="fas fa-search iconRecherche"></i>
+                        </div>
+                    </div>
 
-    <p>test</p>
+                    <br>
+                    {{ form_label(formRecherche.dateUn) }}
+                    {{ form_widget(formRecherche.dateUn) }}
+                    {{ form_label(formRecherche.dateDeux) }}
+                    {{ form_widget(formRecherche.dateDeux) }}
+                </div>
+
+                <div id="colCentre">
+                    {{ form_widget(formRecherche.sortieOrganisateur) }}
+                    {{ form_label(formRecherche.sortieOrganisateur) }}
+                    <br><div class="espace"></div>
+                    {{ form_widget(formRecherche.sortieInscrit) }}
+                    {{ form_label(formRecherche.sortieInscrit) }}
+                    <br><div class="espace"></div>
+                    {{ form_widget(formRecherche.sortiePasInscrit) }}
+                    {{ form_label(formRecherche.sortiePasInscrit) }}
+                    <br><div class="espace"></div>
+                    {{ form_widget(formRecherche.sortiePassees) }}
+                    {{ form_label(formRecherche.sortiePassees) }}
+                    <input id="boutonRechercher" type="button" value="Rechercher">
+                </div>
+
+
+
+            </div>
+
+            {{ form_end(formRecherche) }}
+        </div>
+    </div>
+
+
+    <div id="contentList">
+        <div id="titles">
+            <p class="titleList" id="titleUn">Nom de la sortie</p>
+            <p class="titleList" id="titleDeux">Date de la sortie</p>
+            <p class="titleList" id="titleTrois">Clôture</p>
+            <p class="titleList inscritMax" id="titleQuatre">Inscrit/Places</p>
+            <p class="titleList etat" id="titleCinq">Etat</p>
+            <p class="titleList inscrit" id="titleSix">Inscrit</p>
+            <p class="titleList" id="titleSept">Organisateur</p>
+            <p class="titleList action" id="titleHuit">Actions</p>
+        </div>
+        <div id="content">
+            {% for sortie in sorties %}
+                <p class="contenuColonne">{{ sortie.nom }}</p>
+                <p class="contenuColonne">{{ sortie.dateHeureDebut }}</p>
+                <p class="contenuColonne">{{ sortie.dateLimiteInscription|date('d/m/Y') }}</p>
+                <p class="contenuColonne inscritMax">{{ sortie.nbInscriptionsMax }}</p>
+                <p class="contenuColonne etat"> Fermé </p>
+                <p class="contenuColonne inscrit"> X </p>
+                <p class="contenuColonne"> # </p>
+                <p class="contenuColonne action"> Afficher - S'inscrire - Se désister - Modifier - Publier - Annuler </p>
+            {% endfor %}
+        </div>
+
+    </div>
     <a href="{{ path('sortie_organiser') }}">Organiser une sortie</a>
 {% endblock main %}

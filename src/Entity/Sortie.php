@@ -100,9 +100,9 @@ class Sortie
         return $this;
     }
 
-    public function getDateHeureDebut(): ?\DateTimeInterface
+    public function getDateHeureDebut(): ?string
     {
-        return $this->dateHeureDebut;
+        return $this->dateHeureDebut->format('d/m/Y H\hi');
     }
 
     public function setDateHeureDebut(\DateTimeInterface $dateHeureDebut): self
