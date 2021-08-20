@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,19 +21,12 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription')
             ->add('nbInscriptionsMax')
             ->add('infosSortie')
-//            ->add('etat')
-        /*todo form les jointures*/
 
             ->add('lieu',EntityType::class, [
                 'class'=>Lieu::class,
                 'choice_label'=>'nom',
-                'label'=>'LieuFixtures'
-            ])
-            /*->add('campus',Campus::class, [
+                'label'=>'LieuFixtures'])
 
-            ])*/
-//            ->add('organisateur')
-//            ->add('participants')
         ;
     }
 

@@ -32,11 +32,12 @@ class SortieController extends AbstractController
 
         // Traitement du formulaire s'il est soumis
         if ($sortieForm->isSubmitted() ){
-            /*$em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
+            $sortie->setOrganisateur($this->getUser());
             $em->persist($sortie);
-            $em->flush();*/
+            $em->flush();
 
-            return $this->redirectToRoute('default_home', [$sortie]);
+            return $this->redirectToRoute('default_home');
         }
 
         // envoi du formulaire vers la view
