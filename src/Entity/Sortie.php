@@ -51,7 +51,7 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $etat;
 
@@ -63,13 +63,13 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class)
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
 
