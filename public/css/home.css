@@ -1,0 +1,204 @@
+
+#infoJour {
+    text-align: right;
+    margin-right: 40px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#userProfil {
+    margin-top:10px;
+}
+
+.iconProfil {
+    color: #1e4b6d;
+    margin-left:20px;
+    font-size: 22px;
+    width:19px;
+    height:19px;
+}
+
+#contentFormulaire {
+    display:grid;
+    grid-template-columns: repeat(2, 370px 400px);
+    padding:20px 50px 50px 50px;
+}
+
+#contentFormulaire h4 {
+    font-family: TravisZone, sans-serif;
+    color: #1e4b6d;
+    letter-spacing: 3px;
+    font-size: 28px;
+    text-align: left;
+    margin-bottom:50px;
+}
+
+#colGauche {
+    grid-column: 1;
+    text-align: left;
+    width: 400px;
+}
+
+#colCentre {
+    grid-column: 2;
+    text-align: left;
+}
+
+#labelCampus {
+    display: inline-block;
+    width: 98px;
+}
+
+#inputCampus {
+    display: inline;
+}
+
+#inputCampus #recherche_campus {
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+}
+
+#inputCampus #recherche_campus::selection {
+    background-color: #1e4b6d;
+}
+
+#recherche {
+    margin-top:15px;
+}
+
+#inputRecherche input {
+    width: 303px;
+    border: none;
+    height: 25px;
+    padding:3px;
+    border-radius:5px;
+    margin-top: 4px;
+    margin-bottom:1px;
+}
+
+.iconRecherche {
+    display: inline-block;
+    margin-left: -25px;
+    color:#1e4b6d;
+}
+
+#recherche_dateUn, #recherche_dateDeux {
+    height:25px;
+    border:none;
+    border-radius:5px;
+    margin: 0 2px;
+}
+
+#recherche_dateDeux {
+    margin-left: 1px;
+}
+
+#colCentre label {
+    margin-left:10px;
+}
+
+input[type=checkbox] {
+    -moz-appearance: none;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    border: 2px solid #034758;
+    cursor: pointer;
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 2px;
+}
+
+
+input[type="checkbox"]:checked {
+    color: #FFF;
+    background-color: #034758;
+}
+
+input[type="checkbox"]:checked:before {
+    font-family: 'QuicksandBook', serif;
+    content: '✔';
+    display: block;
+    color: #FFF;
+    font-size: 13px;
+    position: absolute;
+    margin-left:1px;
+    margin-top:-4px;
+
+}
+
+input[type="checkbox"]:disabled {
+    border: 2px solid #cdcdcd;
+    background-color: #f1f1f1;
+}
+
+.espace {
+    height:14px;
+}
+
+#boutonRechercher {
+    border:none;
+    background-color: #1e4b6d;
+    color: #FFFFFF;
+    padding: 5px;
+    position: absolute;
+    border-radius: 5px;
+    margin-left: 116px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    z-index: 0;
+}
+
+#boutonRechercher:hover{
+    background-color: #FFFFFF;
+    color: #1e4b6d;
+    transition-duration: 0.5s;
+}
+
+.titleList {
+    display: inline-block;
+    background-color: #11a5cf;
+    color: #FFFFFF;
+    padding:6px;
+}
+
+.contenuColonne {
+    display: inline-block;
+}
+
+#contentList {
+    background-color: #FFFFFF;
+    color: #1e4b6d;
+    width: 100%;
+    padding:50px;
+    text-align: left;
+
+}
+
+#titles, #content {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 160px 200px 100px 160px 600px;
+}
+
+#titleUn {
+    border-top-left-radius: 5px;
+}
+
+#titleHuit {
+    border-top-right-radius: 5px;
+}
+
+.contenuColonne {
+    padding:6px;
+    background-color: rgba(230, 237, 241, 0.8);
+}
+
+
+
+
+
+
