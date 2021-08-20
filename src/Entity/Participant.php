@@ -8,11 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant implements UserInterface, PasswordAuthenticatedUserInterface
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id
@@ -22,20 +23,28 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     *
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
+     * @Assert\Email(message="Your email is not valid!")
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $password;
+
+    /**
+     * @var string The plain password
+     */
+    private $plainPassword;
+
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -58,6 +67,14 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $actif;
 
     /**
+     * @Assert\NotBlank(message="Please provide your username!")
+     * @Assert\Length(
+     *     min=3,
+     *     max=50,
+     *     minMessage="Minimum 3 characters please!",
+     *     maxMessage="Maximum 50 characters please!"
+     * )
+     * @Assert\Regex(pattern="/^[a-z0-9_-]+$/i", message="Please use only letters, numbers, underscores and dashes!")
      * @ORM\Column(type="string", length=50)
      */
     private $pseudo;
@@ -132,20 +149,27 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainpassword = $plainPassword;
+        $this->password = null;
+    }
+
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
+
 
     /**
      * Returning a salt is only needed, if you are not using a modern
@@ -164,7 +188,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getNom(): ?string
@@ -191,7 +215,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone()
     {
         return $this->telephone;
     }

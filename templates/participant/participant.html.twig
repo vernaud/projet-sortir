@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello PartipantController!{% endblock %}
-
+{% block style %}<link rel="stylesheet" href="{{ asset('css/participant.css') }}">{% endblock style %}
 {% block main %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -12,10 +12,15 @@
     <h1>Mon Profil </h1>
     {{ form(participantForm) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/projet-sortir/src/Controller/ParticipantController.php'|file_link(0) }}">src/Controller/ProfilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/projet-sortir/templates/participant/participant.html.twig'|file_link(0) }}">templates/profil/index.html.twig</a></code></li>
-    </ul>
+    <button>Enregistrer</button>  <button>Annuler</button>
+
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class=" flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}
