@@ -145,12 +145,13 @@ input[type="checkbox"]:disabled {
     padding: 5px;
     position: absolute;
     border-radius: 5px;
-    margin-left: 116px;
+    margin-left: 111px;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     transition-duration: 0.5s;
     z-index: 0;
+    font-family: QuicksandBook, serif;
 }
 
 #boutonRechercher:hover{
@@ -176,7 +177,7 @@ input[type="checkbox"]:disabled {
     width: 100%;
     padding:50px;
     text-align: left;
-
+    margin-bottom: 20px;
 }
 
 #titles, #content {
@@ -197,8 +198,22 @@ input[type="checkbox"]:disabled {
     background-color: rgba(230, 237, 241, 0.8);
 }
 
+#btnAjouterSortie {
+    background-color: #1e4b6d;
+    color: #FFFFFF;
+    padding:10px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top:30px;
+    transition-duration: 0.5s;
+}
 
-
-
+#btnAjouterSortie:hover {
+    color: #1e4b6d;
+    background-color: #FFFFFF;
+    transition-duration: 0.5s;
+}
 
 
