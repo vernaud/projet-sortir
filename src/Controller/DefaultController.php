@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,12 +23,12 @@ class DefaultController extends AbstractController
     public function home(Request $request, SortieRepository $sortieRepository): Response {
 
         // Création du formulaire
-        $formSearchWish = $this->createForm('App\Form\RechercheType');
-        $formSearchWish->handleRequest($request);
+        $searchForm = $this->createForm('App\Form\RechercheType');
+        $searchForm->handleRequest($request);
 
         $sorties = $sortieRepository->findAllSorties();
 
-        return $this->render('default/home.html.twig', ["sorties" => $sorties, 'formRecherche' => $formSearchWish->createView()]);
+        return $this->render('default/home.html.twig', ["sorties" => $sorties, 'formRecherche' => $searchForm->createView()]);
     }
 
 //    /**
