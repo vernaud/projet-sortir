@@ -17,16 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route(path="", name="index", methods={"GET"})
-     * @Route(path="home", name="home", methods={"GET"})
+     * @Route(path="", name="index", methods={"GET", "POST"})
+     * @Route(path="home", name="home", methods={"GET", "POST"})
      */
     public function home(Request $request, SortieRepository $sortieRepository): Response {
 
         // Création du formulaire
         $searchForm = $this->createForm('App\Form\RechercheType');
-        $searchForm->handleRequest($request);
-
         $sorties = $sortieRepository->findAllSorties();
+
+        // Traitement
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted() ){
+
+            return $this->redirectToRoute('default_home');
+        }
+
 
         return $this->render('default/home.html.twig', ["sorties" => $sorties, 'formRecherche' => $searchForm->createView()]);
     }
