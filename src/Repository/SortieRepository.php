@@ -22,7 +22,7 @@ class SortieRepository extends ServiceEntityRepository
     public function findAllSorties() {
 
         $queryBuilder = $this->createQueryBuilder('s');
-        $queryBuilder ->addOrderBy('s.dateHeureDebut', 'DESC');
+        $queryBuilder ->addOrderBy('s.dateHeureDebut', 'ASC');
         $query = $queryBuilder->getQuery();
 
         $results = $query->getResult();

@@ -71,13 +71,24 @@
         <div id="content">
             {% for sortie in sorties %}
                 <p class="contenuColonne">{{ sortie.nom }}</p>
-                <p class="contenuColonne">{{ sortie.dateHeureDebut }}</p>
+                <p class="contenuColonne">{{ sortie.dateHeureDebut|date('d/m/Y') }} {{ sortie.dateHeureDebut|date('H') }}h{{ sortie.dateHeureDebut|date('i') }}</p>
                 <p class="contenuColonne">{{ sortie.dateLimiteInscription|date('d/m/Y') }}</p>
                 <p class="contenuColonne inscritMax">{{ sortie.nbInscriptionsMax }}</p>
-                <p class="contenuColonne etat"> Fermé </p>
-                <p class="contenuColonne inscrit"> X </p>
-                <p class="contenuColonne"> # </p>
-                <p class="contenuColonne action"> Afficher - S'inscrire - Se désister - Modifier - Publier - Annuler </p>
+                <p class="contenuColonne etat"> {{ sortie.etat.libelle }} </p>
+                <p class="contenuColonne inscrit">
+                    {% if app.user in sortie.participants %}
+                        X
+                    {% endif %}
+                </p>
+                <p class="contenuColonne"> {{ sortie.organisateur.pseudo }} </p>
+                <p class="contenuColonne action">Afficher -
+                    {% if app.user not in sortie.participants %}
+                        S'inscrire -
+                    {% endif %}
+                    {% if app.user in sortie.participants %}
+                        Se désister -
+                    {% endif %}
+                     Modifier - Publier - Annuler </p>
             {% endfor %}
         </div>
 
