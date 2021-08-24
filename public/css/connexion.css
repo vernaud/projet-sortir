@@ -5,13 +5,13 @@
 #imglogoConnexion {
     width:428px;
     height:150px;
+    margin-top:-60px;
 }
 
 #socialIconConnexion {
-    position: absolute;
     transform: rotate(-4deg);
-    margin-top: 20px;
-    margin-left: 970px;
+    margin-top: 80px;
+    margin-left: 145px;
 }
 
 #socialIconConnexion i {
