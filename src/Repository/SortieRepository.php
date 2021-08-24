@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function PHPUnit\Framework\isFalse;
+use function PHPUnit\Framework\isNull;
+use function PHPUnit\Framework\isTrue;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,15 +22,71 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function findAllSorties() {
+    public function defaultFind($filtres, $participant)
+    {
+        /*$filtres = [
+            'campus'=>'object Campus',
+            'search'=>'string',
+            'dateUn'=> dateTime'2021-08-19',
+            'dateDeux'=>dateTime'2021-08-20',
+            'sortieOrganisateur'=>'true',
+            'sortieInscrit'=>'true',
+            'sortiePasInscrit'=>'true',
+            'sortiePassees'=>'true'
+        ];*/
+
+        //debug
+        dump($filtres);
+
+
 
         $queryBuilder = $this->createQueryBuilder('s');
-        $queryBuilder ->addOrderBy('s.dateHeureDebut', 'ASC');
+
+        if (!empty($filtres['campus']) ) {
+            $queryBuilder
+                ->andWhere('s.campus = :c')
+                ->setParameter('c', $filtres['campus']);
+        }
+
+        if (!empty($filtres['search']) ) {
+            $queryBuilder
+                ->andWhere('s.nom LIKE :p')
+                ->setParameter('p', '%'.$filtres['search'].'%');
+        }
+
+        if (!empty($filtres['dateUn']) && !empty($filtres['dateDeux'] &&
+                $filtres['dateUn'] <= $filtres['dateDeux']) ) {
+            $queryBuilder
+                ->andWhere('s.dateHeureDebut BETWEEN :from AND :to')
+                ->setParameter('from', $filtres['dateUn'])
+                ->setParameter('to', $filtres['dateDeux']);
+        }
+
+        if (!empty($filtres['sortieOrganisateur']) ) {
+            $queryBuilder
+                ->andWhere('s.organisateur = :o')
+                ->setParameter('o', $participant);
+        }
+
+        if (!empty($filtres['sortieInscrit']) ) {
+            // todo requête inscrit
+            /*$queryBuilder
+                ->andWhere()
+                ->setParameter();*/
+        }
+
+        if (!empty($filtres['sortiePasInscrit']) ) {
+            // todo requête non inscrit
+        }
+
+        if (!empty($filtres['sortiePassees']) ) {
+            $queryBuilder
+                ->andWhere('s.dateHeureDebut < :now')
+                ->setParameter('now', new \DateTime('now'));
+        }
+
         $query = $queryBuilder->getQuery();
-
-        $results = $query->getResult();
-        return $results;
-
+        return $query->getResult();
     }
 
     /**
