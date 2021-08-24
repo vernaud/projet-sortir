@@ -46,7 +46,11 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('c', $filtres['campus']);
         }
 
-
+        if (!empty($filtres['search']) ) {
+            $queryBuilder
+                ->andWhere('s.nom LIKE :p')
+                ->setParameter('p', '%'.$filtres['search'].'%');
+        }
 
         $query = $queryBuilder->getQuery();
         return $query->getResult();
