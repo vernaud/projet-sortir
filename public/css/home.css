@@ -216,4 +216,8 @@ input[type="checkbox"]:disabled {
     transition-duration: 0.5s;
 }
 
-
+.action a {
+    color: #1e4b6d;
+    text-decoration: none;
+    font-weight: bold;
+}

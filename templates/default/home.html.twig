@@ -62,7 +62,7 @@
             <p class="titleList" id="titleUn">Nom de la sortie</p>
             <p class="titleList" id="titleDeux">Date de la sortie</p>
             <p class="titleList" id="titleTrois">Clôture</p>
-            <p class="titleList inscritMax" id="titleQuatre">Inscrit/Places</p>
+            <p class="titleList inscritMax" id="titleQuatre">Inscrits/Places</p>
             <p class="titleList etat" id="titleCinq">Etat</p>
             <p class="titleList inscrit" id="titleSix">Inscrit</p>
             <p class="titleList" id="titleSept">Organisateur</p>
@@ -71,24 +71,63 @@
         <div id="content">
             {% for sortie in sorties %}
                 <p class="contenuColonne">{{ sortie.nom }}</p>
-                <p class="contenuColonne">{{ sortie.dateHeureDebut|date('d/m/Y') }} {{ sortie.dateHeureDebut|date('H') }}h{{ sortie.dateHeureDebut|date('i') }}</p>
+                <p class="contenuColonne">{{ sortie.dateHeureDebut|date('d/m/Y H') }}h{{ sortie.dateHeureDebut|date('i') }}</p>
                 <p class="contenuColonne">{{ sortie.dateLimiteInscription|date('d/m/Y') }}</p>
-                <p class="contenuColonne inscritMax">{{ sortie.nbInscriptionsMax }}</p>
+                <p class="contenuColonne inscritMax">{{ sortie.participants|length }} / {{ sortie.nbInscriptionsMax }}</p>
                 <p class="contenuColonne etat"> {{ sortie.etat.libelle }} </p>
                 <p class="contenuColonne inscrit">
                     {% if app.user in sortie.participants %}
-                        X
+                        <i class="fas fa-check-circle"></i>
                     {% endif %}
                 </p>
                 <p class="contenuColonne"> {{ sortie.organisateur.pseudo }} </p>
-                <p class="contenuColonne action">Afficher -
-                    {% if app.user not in sortie.participants %}
-                        S'inscrire -
+                <p class="contenuColonne action">
+                    <a href="#">Afficher</a>
+
+                    {% if date(sortie.dateLimiteInscription) > date()
+                        and sortie.etat.libelle == "Ouverte"
+                        and app.user not in sortie.participants
+                        and app.user.id != sortie.organisateur.id
+                    %}
+                        - <a href="{{ path('sortie_inscription', {id: sortie.id}) }}">S'inscrire</a>
                     {% endif %}
-                    {% if app.user in sortie.participants %}
-                        Se désister -
+
+
+                    {% if app.user in sortie.participants
+                        and app.user.id != sortie.organisateur.id
+                        and date(sortie.dateLimiteInscription) > date()
+                        and sortie.etat.libelle != "Annulée"
+                        and sortie.etat.libelle != "En Cours"
+                    %}
+                        - <a href="{{ path('sortie_desistement', {id: sortie.id}) }}">Se désister</a>
                     {% endif %}
-                     Modifier - Publier - Annuler </p>
+
+
+
+                    {% if sortie.etat.libelle != "Annulée"
+                        and sortie.etat.libelle != "Passée"
+                        and sortie.etat.libelle != "En Cours"
+                        and app.user.id == sortie.organisateur.id
+                    %}
+                        - <a href="#">Modifier</a>
+                    {% endif %}
+
+
+                    {% if app.user.id == sortie.organisateur.id
+                        and sortie.etat.libelle == "Créée"
+                    %}
+                        - <a href="#">Publier</a>
+                    {% endif %}
+
+                    {% if sortie.etat.libelle != "Annulée"
+                        and sortie.etat.libelle != "Passée"
+                        and sortie.etat.libelle != "En Cours"
+                        and app.user.id == sortie.organisateur.id
+                    %}
+                        - <a href="#">Annuler</a>
+                    {% endif %}
+
+                </p>
             {% endfor %}
         </div>
 

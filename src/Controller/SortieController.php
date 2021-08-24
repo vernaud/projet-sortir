@@ -7,11 +7,13 @@ use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/sortie", name="sortie_")
@@ -47,7 +49,6 @@ class SortieController extends AbstractController
             $etat= $etatRepository->findOneBy(['libelle'=>'Créée']);
             $sortie->setEtat($etat);
 
-
             $em->persist($sortie);
             $em->flush();
 
@@ -58,5 +59,57 @@ class SortieController extends AbstractController
         return $this->render('sortie/organiser.html.twig', [
             'sortieForm' => $sortieForm->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/inscription", name="inscription", requirements={"id": "\d+"})
+     */
+    public function inscription(Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        // Récupération de l'identifiant
+        $id = (int) $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $sortie = $entityManager->getRepository('App:Sortie')->getSortieById($id);
+        $date = new \DateTime("now");
+
+        if ( $sortie->getParticipants()->count() < $sortie->getNbInscriptionsMax()
+            && $sortie->getEtat()->getLibelle() == "Ouverte"
+            && $sortie->getDateLimiteInscription() > $date
+        ){
+            $user = $this->getUser();
+            $sortie->addParticipant($user);
+            $em->persist($sortie);
+            $em->flush();
+        }
+
+
+        return $this->redirectToRoute('default_home');
+    }
+
+    /**
+     * @Route("/desistement", name="desistement", requirements={"id": "\d+"})
+     */
+    public function desistement(Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        // Récupération de l'identifiant
+        $id = (int) $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $sortie = $entityManager->getRepository('App:Sortie')->getSortieById($id);
+        $date = new \DateTime("now");
+
+        if ( ($sortie->getEtat()->getLibelle() == "Ouverte" || $sortie->getEtat()->getLibelle() == "Clôturée")
+            && $sortie->getDateLimiteInscription() > $date
+        ){
+            $user = $this->getUser();
+            $sortie->removeParticipant($user);
+            $em->persist($sortie);
+            $em->flush();
+        }
+
+
+
+        return $this->redirectToRoute('default_home');
     }
 }
