@@ -56,10 +56,10 @@ class SortieRepository extends ServiceEntityRepository
 
         if (!empty($filtres['dateUn']) && !empty($filtres['dateDeux'] &&
                 $filtres['dateUn'] <= $filtres['dateDeux']) ) {
-            // condition ok
-            // todo requête dates
-
-            dump('plage valide');
+            $queryBuilder
+                ->andWhere('s.dateHeureDebut BETWEEN :from AND :to')
+                ->setParameter('from', $filtres['dateUn'])
+                ->setParameter('to', $filtres['dateDeux']);
         }
 
         if (!empty($filtres['sortieOrganisateur']) ) {
