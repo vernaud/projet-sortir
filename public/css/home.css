@@ -145,13 +145,14 @@ input[type="checkbox"]:disabled {
     padding: 5px;
     position: absolute;
     border-radius: 5px;
-    margin-left: 111px;
+    margin-left: 236px;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     transition-duration: 0.5s;
     z-index: 0;
     font-family: QuicksandBook, serif;
+    margin-top:-20px;
 }
 
 .boutonRechercher:hover{
