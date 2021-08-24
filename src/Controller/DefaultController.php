@@ -21,32 +21,38 @@ class DefaultController extends AbstractController
     /**
      * @Route(path="", name="index", methods={"GET", "POST"})
      * @Route(path="home", name="home", methods={"GET", "POST"})
-     * @param Request $request
-     * @param $sortieRepository
      * @return Response
      */
     public function home(Request $request, SortieRepository $sortieRepository): Response
     {
 
-        $filtres = [];
-        $searchForm = $this->createForm(RechercheType::class, $filtres);
+//        $filtres = [];
+        $searchForm = $this->createForm(RechercheType::class);
         $searchForm->handleRequest($request);
 
-        /*if ()
-        $filtres = [
-            'campus'=>$request->get('campus'),
-            'search'=>$request->get('search'),
-            'dateUn'=>$request->get('dateUn'),
-            'dateDeux'=>$request->get('dateDeux'),
-            'sortieOrganisateur'=>$request->get('sortieOrganisateur'),
-            'sortieInscrit'=>$request->get('sortieInscrit'),
-            'sortiePasInscrit'=>$request->get('sortiePasInscrit'),
-            'sortiePassees'=>$request->get('sortiePassees')
-        ];*/
 
-        // requête dynamique
-        $sorties = $sortieRepository->defaultFind();
-//        $sorties = $sortieRepository->findAll();
+        if ($searchForm->isSubmitted()){
+
+            /*$filtres = [
+                'campus'=>$request->get('recherche'),
+                'search'=>$request->get('search'),
+                'dateUn'=>$request->get('dateUn'),
+                'dateDeux'=>$request->get('dateDeux'),
+                'sortieOrganisateur'=>$request->get('sortieOrganisateur'),
+                'sortieInscrit'=>$request->get('sortieInscrit'),
+                'sortiePasInscrit'=>$request->get('sortiePasInscrit'),
+                'sortiePassees'=>$request->get('sortiePassees')
+            ];*/
+
+            $filtres = $searchForm->getData();
+            $participant = $this->getUser();
+            $sorties = $sortieRepository->defaultFind($filtres, $participant);
+
+        } else {
+
+            $sorties = $sortieRepository->findAll();
+
+        }
 
 
         return $this->render('default/home.html.twig', [
