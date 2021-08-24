@@ -1,0 +1,140 @@
+#logo {
+    display: none;
+}
+
+#imglogoConnexion {
+    width:428px;
+    height:150px;
+}
+
+#socialIconConnexion {
+    position: absolute;
+    transform: rotate(-4deg);
+    margin-top: 20px;
+    margin-left: 970px;
+}
+
+#socialIconConnexion i {
+    color: #1e4b6d;
+    font-size: 30px;
+    cursor: pointer;
+    margin:6px;
+    transition-duration: 0.5s;
+}
+
+#formulaireConnexion {
+    margin-top:50px;
+}
+
+h1 {
+    font-family: TravisZone, tahoma, arial, serif;
+    letter-spacing: 2px;
+    color: #1e4b6d;
+}
+
+#contentFormConnexion {
+    text-align: left;
+    width: 390px;
+    padding:5px;
+    margin: 20px auto 10px;
+}
+
+.labelConnexion {
+    width:130px;
+    display: inline-block;
+}
+
+.inputConnexion {
+    margin-top: 10px;
+    width: 245px;
+    padding: 5px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border:none;
+}
+
+.inputConnexion:focus {
+    background-color: #FFFFFF;
+}
+
+input[type=checkbox] {
+    -moz-appearance: none;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    border: 2px solid #034758;
+    cursor: pointer;
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 2px;
+}
+
+
+input[type="checkbox"]:checked {
+    color: #FFF;
+    background-color: #034758;
+}
+
+input[type="checkbox"]:checked:before {
+    font-family: 'QuicksandBook', serif;
+    content: '✔';
+    display: block;
+    color: #FFF;
+    font-size: 13px;
+    position: absolute;
+    margin-left:1px;
+    margin-top:-4px;
+
+}
+
+input[type="checkbox"]:disabled {
+    border: 2px solid #cdcdcd;
+    background-color: #f1f1f1;
+}
+
+#labelSeSouvenir {
+    margin-left:10px;
+}
+
+#btnConnexion {
+    background-color: #1e4b6d;
+    border: none;
+    color: #FFFFFF;
+    padding:5px;
+    font-family: QuicksandBook, serif;
+    font-size:18px;
+    margin-top:20px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    border-radius:5px;
+}
+
+#btnConnexion:hover {
+    background-color: #FFFFFF;
+    color: #1e4b6d;
+}
+
+.alert {
+    background-color: #B0413E;
+    color: #FFFFFF;
+    padding:5px;
+    width:380px;
+    margin: auto auto 20px;
+    border-radius: 5px;
+}
+
+#connecte a {
+    background-color: #1e4b6d;
+    border: none;
+    color: #FFFFFF;
+    padding:6px;
+    font-size:16px;
+    transition-duration: 0.5s;
+    border-radius:5px;
+    text-decoration: none;
+}
+
+#connecte a:hover {
+    background-color: #FFFFFF;
+    color: #1e4b6d;
+}
