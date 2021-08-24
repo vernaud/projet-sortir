@@ -54,28 +54,35 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('p', '%'.$filtres['search'].'%');
         }
 
-        /*if (!empty($filtres['dateUn']) && !empty($filtres['dateDeux'] &&
+        if (!empty($filtres['dateUn']) && !empty($filtres['dateDeux'] &&
                 $filtres['dateUn'] <= $filtres['dateDeux']) ) {
+            // condition ok
+            // todo requête dates
 
-        }*/
+            dump('plage valide');
+        }
 
         if (!empty($filtres['sortieOrganisateur']) ) {
             $queryBuilder
                 ->andWhere('s.organisateur = :o')
                 ->setParameter('o', $participant);
-            dump("isTrue");
         }
 
         if (!empty($filtres['sortieInscrit']) ) {
-
+            // todo requête inscrit
+            /*$queryBuilder
+                ->andWhere()
+                ->setParameter();*/
         }
 
         if (!empty($filtres['sortiePasInscrit']) ) {
-
+            // todo requête non inscrit
         }
 
         if (!empty($filtres['sortiePassees']) ) {
-            // affiche QUE les sorties > now
+            $queryBuilder
+                ->andWhere('s.dateHeureDebut < :now')
+                ->setParameter('now', new \DateTime('now'));
         }
 
         $query = $queryBuilder->getQuery();
