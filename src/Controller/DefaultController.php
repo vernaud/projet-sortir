@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 
+use App\Form\RechercheType;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,22 +21,37 @@ class DefaultController extends AbstractController
     /**
      * @Route(path="", name="index", methods={"GET", "POST"})
      * @Route(path="home", name="home", methods={"GET", "POST"})
+     * @param Request $request
+     * @param $sortieRepository
+     * @return Response
      */
-    public function home(Request $request, SortieRepository $sortieRepository): Response {
+    public function home(Request $request, SortieRepository $sortieRepository): Response
+    {
 
-        // Création du formulaire
-        $searchForm = $this->createForm('App\Form\RechercheType');
-        $sorties = $sortieRepository->findAllSorties();
-
-        // Traitement
+        $filtres = [];
+        $searchForm = $this->createForm(RechercheType::class, $filtres);
         $searchForm->handleRequest($request);
-        if ($searchForm->isSubmitted() ){
 
-            return $this->redirectToRoute('default_home');
-        }
+        /*if ()
+        $filtres = [
+            'campus'=>$request->get('campus'),
+            'search'=>$request->get('search'),
+            'dateUn'=>$request->get('dateUn'),
+            'dateDeux'=>$request->get('dateDeux'),
+            'sortieOrganisateur'=>$request->get('sortieOrganisateur'),
+            'sortieInscrit'=>$request->get('sortieInscrit'),
+            'sortiePasInscrit'=>$request->get('sortiePasInscrit'),
+            'sortiePassees'=>$request->get('sortiePassees')
+        ];*/
+
+        // requête dynamique
+        $sorties = $sortieRepository->defaultFind();
+//        $sorties = $sortieRepository->findAll();
 
 
-        return $this->render('default/home.html.twig', ["sorties" => $sorties, 'formRecherche' => $searchForm->createView()]);
+        return $this->render('default/home.html.twig', [
+            "sorties" => $sorties,
+            'formRecherche' => $searchForm->createView()]);
     }
 
 //    /**

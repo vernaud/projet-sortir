@@ -19,7 +19,40 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function findAllSorties() {
+    public function defaultFind()
+    {
+        // test avec bouchon
+        // à remplacer par valeur du formulaire en param de function
+        $filtres = [
+            'campus'=>'',
+            'search'=>'',
+            'dateUn'=>'',
+            'dateDeux'=>'',
+            'sortieOrganisateur'=>'',
+            'sortieInscrit'=>'',
+            'sortiePasInscrit'=>'',
+            'sortiePassees'=>''
+        ];
+        // fin bouchon à supprimer
+
+
+
+        $queryBuilder = $this->createQueryBuilder('s');
+
+
+        if (!empty($filtres['campus']) ) {
+            $queryBuilder
+                ->andWhere('s.campus = :c')
+                ->setParameter('c', $filtres['campus']);
+        }
+
+
+
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
+    }
+
+    /*public function findAllSorties() {
 
         $queryBuilder = $this->createQueryBuilder('s');
         $queryBuilder ->addOrderBy('s.dateHeureDebut', 'ASC');
@@ -28,7 +61,7 @@ class SortieRepository extends ServiceEntityRepository
         $results = $query->getResult();
         return $results;
 
-    }
+    }*/
 
     /**
      * @param int $id
