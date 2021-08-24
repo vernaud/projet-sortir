@@ -45,7 +45,12 @@
                     <br><div class="espace"></div>
                     {{ form_widget(formRecherche.sortiePassees) }}
                     {{ form_label(formRecherche.sortiePassees) }}
-                    <input id="boutonRechercher" type="button" value="Rechercher">
+
+                    {#Bouton Submit#}
+                    {{ form_row(formRecherche.submit, {
+                        'label': "Rechercher",
+                        'attr': {'class':'boutonRechercher'}
+                    }) }}
                 </div>
 
 
