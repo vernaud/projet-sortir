@@ -3,47 +3,44 @@
 namespace App\Controller;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
-use ContainerDKgBEMY\getParticipantControllerService;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+USE Symfony\component\httpFoundation\rquest;
+use ContainerDKgBEMY\getParticipantControllerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route(path="profil/edit", name="edit", methods={"GET", "POST"})
+     * @Route(path="edit/profil", name="edit", methods={"GET", "POST"})
+     *
      */
-    public function edit(Request $request, EntityManagerInterface $entityManager)
+    public function Edit( Request $request, EntityManagerInterface $em)
     {
+        $userSession = $this->getUser();
+        $participant = $em->getRepository('App:Participant')->findOneBy(['email'=>$userSession->getUserIdentifier()]);
+        $participantForm=$this->createForm(ParticipantType::class, $participant);
 
-        try {
+        $participantForm->add('create', SubmitType::class, [
+            'label'=>'Enregistrer']);
 
-            $partcipant = $entityManager->getRepository('App:Participant');
+        $participantForm->handleRequest($request);
+        if ($participantForm->isSubmitted() && $participantForm->isValid()) {
+            $participantForm=$participantForm->getData();
 
-        } catch (NonUniqueResultException | NoResultException $partcipant) {
-            throw $this->createNotFoundException('participant!');
-        }
 
-        $formParticipant = $this->createForm('App\Form\ParticipantType');
-        $formParticipant->handleRequest($request);
+            $em->persist($participantForm);
 
-        if ($formParticipant->isSubmitted() && $formParticipant->isValid()) {
-            // Censure
-            $partcipant->setDescription($partcipant->purify($partcipant->getDescription()));
-
-            $entityManager->persist($partcipant);
-            $entityManager->flush();
-
-            $this->addFlash('Success', 'Profil modifie!');
-            return $this->redirectToRoute('default_home', ['id' => $partcipant->getId()]);
+            $this->addFlash('Success', 'Profil participant modifie!');
+            return $this->redirectToRoute('admin_participant_edit', [
+                'id' => $participantForm->getId(),
+            ]);
         }
 
         return $this->render('participant/participant.html.twig', [
-            'form' => $formParticipant->createView(),
+            'participantForm' => $participantForm->createView(),
         ]);
     }
 }

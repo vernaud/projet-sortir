@@ -57,7 +57,7 @@ class Participant implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="integer", length=10)
      */
     private $telephone;
 

@@ -28,7 +28,8 @@ class ParticipantType extends AbstractType
                 'label'=>'Nom '
             ])
             ->add('telephone', NumberType::class,[
-                'label'=>'Telephone '
+                'label'=>'Telephone',
+                'required'=> false,
             ])
             ->add('email', EmailType::class,[
                 'label'=>'Email '
