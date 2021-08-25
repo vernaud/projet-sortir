@@ -66,15 +66,17 @@ class SortieController extends AbstractController
      */
     public function edit(Request $request): Response
     {
-        // todo if not organisateur -> redirect home (add flash)
 
         // Récupération de l'objet sortie
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
-        dd($sortie);
 
-        // Instancier SortieType
-        $sortie = new Sortie();
+        // Suis-je l'organisateur ?
+        if ($sortie->getOrganisateur() != $this->getUser()){
+            return $this->redirectToRoute('default_home');
+        }
+
+        // Création du formulaire
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         // Ajouter le submit
         $sortieForm->add('create', SubmitType::class, [
@@ -84,24 +86,14 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         // Traitement du formulaire s'il est soumis
-        /*if ($sortieForm->isSubmitted() ){
+        if ($sortieForm->isSubmitted() ){
             $em = $this->getDoctrine()->getManager();
-            $participantRepository=$em->getRepository(Participant::class);
-            $etatRepository=$em->getRepository(Etat::class);
-            $campusRepository=$em->getRepository(Campus::class);
-
-            $participant= $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
-            $sortie->setOrganisateur($participant);
-            $sortie->setCampus($participant->getCampus());
-
-            $etat= $etatRepository->findOneBy(['libelle'=>'Créée']);
-            $sortie->setEtat($etat);
 
             $em->persist($sortie);
             $em->flush();
 
             return $this->redirectToRoute('default_home');
-        }*/
+        }
 
         // envoi du formulaire vers la view
         return $this->render('sortie/organiser.html.twig', [
