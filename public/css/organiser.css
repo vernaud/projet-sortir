@@ -1,0 +1,125 @@
+h1 {
+    font-family: TravisZone, tahoma, arial, serif;
+    color: #FFFFFF;
+    letter-spacing: 3px;
+    margin:20px;
+}
+
+#contentFormOrganiser {
+    background-color: #FFFFFF;
+    color: #1e4b6d;
+    width: 740px;
+    border-radius: 5px;
+    margin:auto;
+    padding:20px;
+}
+
+#contentGrid {
+    display: grid;
+    grid-template-columns: 300px 300px;
+}
+
+#gauche, #droite {
+    text-align: left;
+}
+
+#labelNom {
+    display: inline-block;
+    width:220px;
+}
+
+#inputNom {
+
+
+}
+
+#sortie_nom {
+    background-color: #84cbe2;
+    color: #1e4b6d;
+    padding:3px;
+    border-radius: 5px;
+    border: none;
+    width:237px;
+    margin-top:5px;
+}
+
+#labelDateHeureDebut, #labelDuree, #labelDateLimiteInscription, #labelNbInscriptionsMax, #labelLieu {
+    margin-top:20px;
+}
+
+#sortie_dateHeureDebut_date {
+    display: inline-block;
+    margin-top: 5px;
+    background-color: #84cbe2;
+    color: transparent;
+    padding:3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#sortie_dateHeureDebut_time {
+    display: inline;
+    background-color: #84cbe2;
+    color: transparent;
+    padding:3px 3px 4px 3px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#sortie_dateHeureDebut_date_day, #sortie_dateHeureDebut_date_month, #sortie_dateHeureDebut_date_year,
+#sortie_dateHeureDebut_time_hour, #sortie_dateHeureDebut_time_minute {
+    background: none;
+    border: none;
+    color: #1e4b6d;
+}
+
+#inputDuree, #inputDateLimiteInscription, #inputNbInscriptionsMax, #inputInfosSortie, #inputLieu {
+    margin-top:5px;
+}
+
+#sortie_duree, #sortie_dateLimiteInscription, #sortie_nbInscriptionsMax, #sortie_lieu {
+    background-color: #84cbe2;
+    color: #1e4b6d;
+    padding:3px;
+    border-radius: 5px;
+    border: none;
+    width:237px;
+}
+
+#sortie_infosSortie {
+    background-color: #84cbe2;
+    color: #1e4b6d;
+    padding:3px;
+    border-radius: 5px;
+    border: none;
+    width:400px;
+    height:150px;
+}
+
+#btnCreate {
+    margin-top:30px;
+}
+
+#sortie_create {
+    background-color: #1e4b6d;
+    padding:5px;
+    color: #FFFFFF;
+    border: none;
+    cursor:pointer;
+    border-radius:5px;
+    font-family: QuicksandBook, serif;
+    font-size: 18px;
+    margin:3px;
+}
+
+#btnAnnuler {
+    background-color: #FFFFFF;
+    padding:5px;
+    color: #1e4b6d;
+    border: solid 2px #1e4b6d;
+    cursor:pointer;
+    border-radius:5px;
+    font-family: QuicksandBook, serif;
+    text-decoration: none;
+    margin:3px;
+}
