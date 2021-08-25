@@ -61,6 +61,26 @@ class SortieController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/afficher-{id}", name="afficher", requirements={"id": "\d+"}, methods={"GET", "POST"})
+     */
+    public function afficher(Request $request): Response
+    {
+
+        // Récupération de l'objet sortie
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
+
+        // debug
+        dump($sortie);
+
+        // Redirection
+        return $this->render('sortie/afficher.html.twig', [
+            'sortie'=>$sortie,
+        ]);
+    }
+
     /**
      * @Route("/inscription", name="inscription", requirements={"id": "\d+"})
      */
