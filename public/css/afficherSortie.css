@@ -1,0 +1,83 @@
+
+h1 {
+    font-family: TravisZone, tahoma, arial, serif;
+    color: #1e4b6d;
+    letter-spacing: 3px;
+}
+
+#contentDetails {
+    display: grid;
+    grid-template-columns: 2fr auto;
+    width:1100px;
+    text-align: left;
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    padding:20px;
+    margin: 30px auto auto;
+    color: #1e4b6d;
+}
+
+
+.labelSortie {
+    display: inline-block;
+    width:250px;
+    margin:7px 0;
+}
+
+.labelSortieDroite {
+    display: inline-block;
+    width:150px;
+    margin:7px 0;
+}
+
+.infosSortie {
+    display: inline-block;
+    background-color: #84cbe2;
+    color: #1e4b6d;
+    padding:3px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.description {
+    min-height:120px;
+    width:555px;
+}
+
+.labeldescription {
+    margin:7px 0;
+}
+
+#listeParticipants {
+    width:455px;
+    background: #FFFFFF;
+    margin: 20px auto auto;
+    text-align: center;
+    padding:10px;
+    border-radius: 5px;
+}
+
+h3 {
+    font-family: TravisZone, tahoma, arial, serif;
+    color: #11a5cf;
+    margin:5px;
+    letter-spacing: 3px;
+    font-size: 21px;
+}
+
+table {
+    width: 450px;
+    margin: auto;
+}
+
+.pseudo {
+    width:150px;
+}
+
+.nom {
+    width:200px;
+}
+
+.pseudo, .nom {
+    padding:7px 0;
+}

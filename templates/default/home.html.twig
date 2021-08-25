@@ -87,7 +87,7 @@
                 </p>
                 <p class="contenuColonne"> {{ sortie.organisateur.pseudo }} </p>
                 <p class="contenuColonne action">
-                    <a href="{{url('sortie_afficher', {"id": sortie.id }) }}">Afficher</a>
+                    <a class="zoombox" href="{{url('sortie_afficher', {"id": sortie.id }) }}">Afficher</a>
 
                     {% if date(sortie.dateLimiteInscription) > date()
                         and sortie.etat.libelle == "Ouverte"

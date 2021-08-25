@@ -89,6 +89,8 @@
     border:none;
     border-radius:5px;
     margin: 0 2px;
+    width: 114px;
+    -webkit-appearance: none;
 }
 
 #recherche_dateDeux {
@@ -222,4 +224,22 @@ input[type="checkbox"]:disabled {
     color: #1e4b6d;
     text-decoration: none;
     font-weight: bold;
+}
+
+#recherche_campus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+#inputCampus::after {
+    content: '';
+    position: absolute;
+    margin-top: 9px;
+    margin-left:-22px;
+    width: 0; height: 0;
+    border-color: transparent;
+    border-top-color: #1e4b6d;
+    border-width: 6px;
+    border-style: solid;
+    pointer-events: none;
 }
