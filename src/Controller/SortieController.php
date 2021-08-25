@@ -71,8 +71,8 @@ class SortieController extends AbstractController
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
 
-        // Suis-je l'organisateur ?
-        if ($sortie->getOrganisateur() != $this->getUser()){
+        // Etat == Créée ? Suis-je l'organisateur ?
+        if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
             return $this->redirectToRoute('default_home');
         }
 
