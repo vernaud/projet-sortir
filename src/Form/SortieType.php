@@ -28,7 +28,8 @@ class SortieType extends AbstractType
                 'date_format' => 'dd:MM:yyyy',
             ])
             ->add('duree', IntegerType::class, [
-                'label'=>'Durée (en minutes) :'
+                'label'=>'Durée (en minutes) :',
+                'attr'=> ['min'=> 10]
             ])
             ->add('dateLimiteInscription', DateType::class, [
                 'html5' => true,
@@ -36,7 +37,8 @@ class SortieType extends AbstractType
                 'label'=>'Date limite d\'inscription :'
             ])
             ->add('nbInscriptionsMax', IntegerType::class, [
-                'label'=>'Nombre de places :'
+                'label'=>'Nombre de places :',
+                'attr'=> ['min'=> 1]
             ])
             ->add('infosSortie', TextareaType::class, [
                 'label'=>'Description :'
