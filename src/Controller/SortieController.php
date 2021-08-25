@@ -69,12 +69,16 @@ class SortieController extends AbstractController
     {
 
         // Récupération de l'objet sortie
-        /*$sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
-        $sortie = $sortieRepository->findOneBy();
-        // debug
-        dd($sortie);*/
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
 
-        return $this->render('sortie/afficher.html.twig');
+        // debug
+        dump($sortie);
+
+        // Redirection
+        return $this->render('sortie/afficher.html.twig', [
+            'sortie'=>$sortie,
+        ]);
     }
 
     /**
