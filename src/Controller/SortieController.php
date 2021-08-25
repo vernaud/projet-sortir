@@ -23,7 +23,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/organiser", name="organiser")
      */
-    public function organiser(Request $request): Response
+    public function create(Request $request): Response
     {
         // Instancier SortieType
         $sortie = new Sortie();
@@ -61,6 +61,49 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/edit-{id}", name="edit", requirements={"id": "\d+"}, methods={"GET", "POST"})
+     */
+    public function edit(Request $request): Response
+    {
+
+        // Récupération de l'objet sortie
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
+
+        // Etat == Créée ? Suis-je l'organisateur ?
+//        $this->isValidEtatOrganisateur($sortie);
+
+
+        if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
+            return $this->redirectToRoute('default_home');
+        }
+
+
+        // Création du formulaire
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+        // Ajouter le submit
+        $sortieForm->add('create', SubmitType::class, [
+            'label'=>'Enregistrer']);
+
+
+        $sortieForm->handleRequest($request);
+
+        // Traitement du formulaire s'il est soumis
+        if ($sortieForm->isSubmitted() ){
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($sortie);
+            $em->flush();
+
+            return $this->redirectToRoute('default_home');
+        }
+
+        // envoi du formulaire vers la view
+        return $this->render('sortie/organiser.html.twig', [
+            'sortieForm' => $sortieForm->createView(),
+        ]);
+    }
 
     /**
      * @Route("/afficher-{id}", name="afficher", requirements={"id": "\d+"}, methods={"GET", "POST"})
@@ -72,13 +115,44 @@ class SortieController extends AbstractController
         $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
 
-        // debug
-        dump($sortie);
-
         // Redirection
         return $this->render('sortie/afficher.html.twig', [
             'sortie'=>$sortie,
         ]);
+    }
+
+    /**
+     * @Route("/publier-{id}", name="publier", requirements={"id": "\d+"}, methods={"GET", "POST"})
+     */
+    public function publier(Request $request): Response
+    {
+
+        // Récupération de l'objet sortie
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
+
+
+
+//        $this->isValidEtatOrganisateur($sortie);
+        if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
+            return $this->redirectToRoute('default_home');
+        }
+
+
+
+        // Changement de l'état
+        $etatRepository=$this->getDoctrine()->getRepository(Etat::class);
+        $etat= $etatRepository->findOneBy(['libelle'=>'Ouverte']);
+        $sortie->setEtat($etat);
+
+        // flush
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($sortie);
+        $em->flush();
+
+
+        // Redirection
+        return $this->redirectToRoute('default_home');
     }
 
     /**
@@ -131,5 +205,17 @@ class SortieController extends AbstractController
 
 
         return $this->redirectToRoute('default_home');
+    }
+
+    public function isValidEtatOrganisateur(Request $request, $sortie) :Response
+    {
+        dump($sortie);
+        dump($sortie->getEtat()->getLibelle());
+        dump($sortie->getOrganisateur());
+        dump($this->getUser());
+
+        if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisteur() != $this->getUser()) ){
+            return $this->redirectToRoute('default_home');
+        }
     }
 }
