@@ -109,20 +109,14 @@
 
 
 
-                    {% if sortie.etat.libelle != "Annulée"
-                        and sortie.etat.libelle != "Passée"
-                        and sortie.etat.libelle != "En Cours"
-                        and app.user.id == sortie.organisateur.id
-                    %}
-                        - <a href="#">Modifier</a>
-                    {% endif %}
-
-
                     {% if app.user.id == sortie.organisateur.id
                         and sortie.etat.libelle == "Créée"
                     %}
+                        - <a href="{{url('sortie_edit', {"id": sortie.id }) }}">Modifier</a>
                         - <a href="#">Publier</a>
                     {% endif %}
+
+
 
                     {% if sortie.etat.libelle != "Annulée"
                         and sortie.etat.libelle != "Passée"

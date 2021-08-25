@@ -25,7 +25,7 @@
                 {# Gestion des villes et Campus par l'administrateur itération 3#}
                 {# <li><a href="#">Ville</a></li>#}
                 {# <li><a href="#">Campus</a></li>#}
-                <li><a href="#">Accueil</a></li>
+                <li><a href="{{ path('default_home') }}">Accueil</a></li>
                 {% if app.user %}
                     <li><a href="#">Mon profil</a></li>
                     <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
@@ -51,7 +51,7 @@
                             {# Gestion des villes et Campus par l'administrateur itération 3#}
                             {#<li><a href="#">Ville</a></li>#}
                             {#<li><a href="#">Campus</a></li>#}
-                            <li><a href="#">Accueil</a></li>
+                            <li><a href="{{ path('default_home') }}">Accueil</a></li>
                             {% if app.user %}
                                 <li><a href="#">Mon profil</a></li>
                                 <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>

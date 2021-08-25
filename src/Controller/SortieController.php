@@ -23,7 +23,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/organiser", name="organiser")
      */
-    public function organiser(Request $request): Response
+    public function create(Request $request): Response
     {
         // Instancier SortieType
         $sortie = new Sortie();
@@ -61,6 +61,45 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/edit-{id}", name="edit", requirements={"id": "\d+"}, methods={"GET", "POST"})
+     */
+    public function edit(Request $request): Response
+    {
+
+        // Récupération de l'objet sortie
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
+
+        // Etat == Créée ? Suis-je l'organisateur ?
+        if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
+            return $this->redirectToRoute('default_home');
+        }
+
+        // Création du formulaire
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+        // Ajouter le submit
+        $sortieForm->add('create', SubmitType::class, [
+            'label'=>'Enregistrer']);
+
+
+        $sortieForm->handleRequest($request);
+
+        // Traitement du formulaire s'il est soumis
+        if ($sortieForm->isSubmitted() ){
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($sortie);
+            $em->flush();
+
+            return $this->redirectToRoute('default_home');
+        }
+
+        // envoi du formulaire vers la view
+        return $this->render('sortie/organiser.html.twig', [
+            'sortieForm' => $sortieForm->createView(),
+        ]);
+    }
 
     /**
      * @Route("/afficher-{id}", name="afficher", requirements={"id": "\d+"}, methods={"GET", "POST"})

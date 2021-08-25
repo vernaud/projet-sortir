@@ -184,6 +184,7 @@ input[type="checkbox"]:disabled {
 #titles, #content {
     display: grid;
     grid-template-columns: 200px 200px 200px 160px 200px 100px 160px 600px;
+    /*grid-template-columns: auto auto auto auto auto auto auto auto;*/
 }
 
 #titleUn {

@@ -1,13 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} | Organiser{% endblock %}
+{% block style %}<link rel="stylesheet" href="{{ asset('css/organiser.css') }}">{% endblock style %}
 
 {% block main %}
     <h1>Organiser une sortie</h1>
     {{ form_start(sortieForm) }}
-        {{ form_widget(sortieForm) }}
-        <a href="{{ path('default_home') }}">Annuler</a>
-    {{ form_end(sortieForm) }}
+    <div id="contentFormOrganiser">
+        <div id="contentGrid">
+            <div id="gauche">
+                <div id="labelNom">{{ form_label(sortieForm.nom) }}</div>
+                <div id="inputNom">{{ form_widget(sortieForm.nom) }}</div>
 
+                <div id="labelDateHeureDebut">{{ form_label(sortieForm.dateHeureDebut) }}</div>
+                <div id="inputDateHeureDebut">{{ form_widget(sortieForm.dateHeureDebut) }}</div>
+
+                <div id="labelDuree">{{ form_label(sortieForm.duree) }}</div>
+                <div id="inputDuree">{{ form_widget(sortieForm.duree) }}</div>
+
+                <div id="labelDateLimiteInscription">{{ form_label(sortieForm.dateLimiteInscription) }}</div>
+                <div id="inputDateLimiteInscription">{{ form_widget(sortieForm.dateLimiteInscription) }}</div>
+
+                <div id="labelNbInscriptionsMax">{{ form_label(sortieForm.nbInscriptionsMax) }}</div>
+                <div id="inputNbInscriptionsMax">{{ form_widget(sortieForm.nbInscriptionsMax) }}</div>
+            </div>
+
+            <div id="droite">
+                <div id="labelInfosSortie">{{ form_label(sortieForm.infosSortie) }}</div>
+                <div id="inputInfosSortie">{{ form_widget(sortieForm.infosSortie) }}</div>
+
+                <div id="labelLieu">{{ form_label(sortieForm.lieu) }}</div>
+                <div id="inputLieu">{{ form_widget(sortieForm.lieu) }}</div>
+            </div>
+        </div>
+        <div id="btnCreate">
+            <a id="btnAnnuler" href="{{ path('default_home') }}">Annuler</a>
+            {{ form_widget(sortieForm.create) }}
+        </div>
+
+    {{ form_end(sortieForm) }}
+    </div>
     {# todo afficher un message de réussite sur la page suivante #}
 {% endblock %}
