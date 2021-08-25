@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
         $participant1->setPassword($this->passwordHasher->hashPassword(
             $participant1,
             'pass'));
-        $participant1->setRoles(['ROLE_USER']);
+        $participant1->setRoles(['admin'=>'ROLE_ADMIN']);
         $participant1->setActif(true);
         $participant1->setCampus($campus);
         $manager->persist($participant1);
@@ -80,7 +80,6 @@ class AppFixtures extends Fixture
         $participant2->setPassword($this->passwordHasher->hashPassword(
             $participant2,
             'pass'));
-        $participant2->setRoles(['ROLE_USER']);
         $participant2->setActif(true);
         $participant2->setCampus($campus);
         $manager->persist($participant2);

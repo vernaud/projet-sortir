@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant implements UserInterface
+class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -29,21 +29,20 @@ class Participant implements UserInterface
     private $email;
 
     /**
-     * @Assert\Email(message="Your email is not valid!")
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $password;
 
     /**
-     * @var string The plain password
+     * @var string|null The plain password
      */
-    private $plainPassword;
+    private ?string $plainPassword;
 
 
     /**
@@ -57,7 +56,8 @@ class Participant implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="string", length=10)
+     * @assert\Type(type="string")
      */
     private $telephone;
 
@@ -149,23 +149,22 @@ class Participant implements UserInterface
         return $this;
     }
 
-    public function getPlainPassword()
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
-    public function setPlainPassword($plainPassword)
+    public function setPlainPassword($plainPassword): void
     {
-        $this->plainpassword = $plainPassword;
-        $this->password = null;
+        $this->plainPassword = $plainPassword;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->password = $password;
     }

@@ -5,38 +5,42 @@ use App\Entity\Participant;
 use App\Form\ParticipantType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-USE Symfony\component\httpFoundation\rquest;
-use ContainerDKgBEMY\getParticipantControllerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route(path="edit/profil", name="edit", methods={"GET", "POST"})
+     * @Route("/edit/profil", name="edit",  requirements={"id" = "\d+"}, methods={"GET", "POST"})
      *
      */
-    public function Edit( Request $request, EntityManagerInterface $em)
+    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher):Response
     {
-        $userSession = $this->getUser();
-        $participant = $em->getRepository('App:Participant')->findOneBy(['email'=>$userSession->getUserIdentifier()]);
-        $participantForm=$this->createForm(ParticipantType::class, $participant);
-
+        $partcipantRapository = $this->getDoctrine()->getRepository(Participant::class);
+        $participant = $partcipantRapository->findOneBy( ['id'=>$this->getUser()] );
+        dump($participant);
+        $oldPassword = $participant->getPassword();
+        $participantForm = $this->createForm(ParticipantType::class, $participant);
         $participantForm->add('create', SubmitType::class, [
-            'label'=>'Enregistrer']);
+            'label' => 'Enregistrer']);
 
         $participantForm->handleRequest($request);
+
         if ($participantForm->isSubmitted() && $participantForm->isValid()) {
-            $participantForm=$participantForm->getData();
+//            dump($participant);exit;
+            if($participant->getPassword() != $oldPassword) {
+                $newHashedPassword = $hasher->hashPassword($participant, $participant->getPassword());
+                $participant->setPassword($newHashedPassword);
+            }
 
 
-            $em->persist($participantForm);
+            $entityManager->persist($participant);
+            $entityManager->flush();
+            return $this->redirectToRoute('edit');
 
-            $this->addFlash('Success', 'Profil participant modifie!');
-            return $this->redirectToRoute('admin_participant_edit', [
-                'id' => $participantForm->getId(),
-            ]);
         }
 
         return $this->render('participant/participant.html.twig', [

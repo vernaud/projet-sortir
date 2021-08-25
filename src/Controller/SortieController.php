@@ -74,7 +74,6 @@ class SortieController extends AbstractController
         // Etat == Créée ? Suis-je l'organisateur ?
 //        $this->isValidEtatOrganisateur($sortie);
 
-
         if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
             return $this->redirectToRoute('default_home');
         }
