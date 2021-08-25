@@ -6,9 +6,7 @@ namespace App\Controller;
 
 use App\Form\RechercheType;
 use App\Repository\SortieRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,23 +24,11 @@ class DefaultController extends AbstractController
     public function home(Request $request, SortieRepository $sortieRepository): Response
     {
 
-//        $filtres = [];
         $searchForm = $this->createForm(RechercheType::class);
         $searchForm->handleRequest($request);
 
 
         if ($searchForm->isSubmitted()){
-
-            /*$filtres = [
-                'campus'=>$request->get('recherche'),
-                'search'=>$request->get('search'),
-                'dateUn'=>$request->get('dateUn'),
-                'dateDeux'=>$request->get('dateDeux'),
-                'sortieOrganisateur'=>$request->get('sortieOrganisateur'),
-                'sortieInscrit'=>$request->get('sortieInscrit'),
-                'sortiePasInscrit'=>$request->get('sortiePasInscrit'),
-                'sortiePassees'=>$request->get('sortiePassees')
-            ];*/
 
             $filtres = $searchForm->getData();
             $participant = $this->getUser();
