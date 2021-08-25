@@ -1,12 +1,12 @@
 h1 {
     font-family: TravisZone, tahoma, arial, serif;
-    color: #FFFFFF;
+    color: #1e4b6d;
     letter-spacing: 3px;
     margin:20px;
 }
 
 #contentFormOrganiser {
-    background-color: #FFFFFF;
+    background-color: #F7F7F7;
     color: #1e4b6d;
     width: 740px;
     border-radius: 5px;
@@ -113,7 +113,7 @@ h1 {
 }
 
 #btnAnnuler {
-    background-color: #FFFFFF;
+    background-color: #F7F7F7;
     padding:5px;
     color: #1e4b6d;
     border: solid 2px #1e4b6d;
@@ -122,4 +122,80 @@ h1 {
     font-family: QuicksandBook, serif;
     text-decoration: none;
     margin:3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#sortie_lieu {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#inputLieu::after {
+    content: '';
+    position: absolute;
+    margin-top: 9px;
+    margin-left:-22px;
+    width: 0; height: 0;
+    border-color: transparent;
+    border-top-color: #1e4b6d;
+    border-width: 6px;
+    border-style: solid;
+    pointer-events: none;
+}
+
+#sortie_dateHeureDebut_date_day, #sortie_dateHeureDebut_date_month, #sortie_dateHeureDebut_time_hour, #sortie_dateHeureDebut_time_minute {
+    width:38px;
+    -moz-appearance: none;
+    background-color: #84cbe2;
+    border: none;
+}
+
+#sortie_dateHeureDebut_date_year {
+    width: 57px;
+    -moz-appearance: none;
+    background-color: #84cbe2;
+    border: none;
+}
+
+#iconJour::after, #iconMois::after, #iconAnnee::after, #iconHeure::after, #iconMinute::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 0;
+    border-color: transparent;
+    border-top-color: #1e4b6d;
+    border-width: 6px;
+    border-style: solid;
+    pointer-events: none;
+    margin-top: 15px;
+}
+
+#iconJour::after {
+    margin-left:26px;
+}
+
+#iconMois::after {
+    margin-left:68px;
+}
+
+#iconAnnee::after {
+    margin-left:130px;
+}
+
+#iconHeure::after {
+    margin-left: 178px;
+}
+
+#iconMinute::after{
+    margin-left: 220px;
 }

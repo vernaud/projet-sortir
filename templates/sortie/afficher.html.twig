@@ -1,10 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
+{% block title %}{{ parent() }} - Détails{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{{ asset('css/afficherSortie.css') }}">{% endblock style %}
 
-{% endblock %}
 
 {% block main %}
 
-{% endblock %}
+    <h1>Détails de la sortie</h1>
 
+    <div id="contentDetails">
+        <div id="gaucheDetails">
+            <p class="labelSortie">Nom de la sortie :</p>
+            <p class="infosSortie">{{ sortie.nom }}</p>
+            <br>
+            <p class="labelSortie">Date et heure de la sortie :</p>
+            <p class="infosSortie">Le {{ sortie.dateHeureDebut|date('d/m/Y') }} à {{ sortie.dateHeureDebut|date('H') }}h{{ sortie.dateHeureDebut|date('i') }}</p>
+            <br>
+            <p class="labelSortie">Date limite d'inscription :</p>
+            <p class="infosSortie">{{ sortie.dateLimiteInscription|date('d/m/Y') }}</p>
+            <br>
+            <p class="labelSortie">Nombre de places :</p>
+            <p class="infosSortie">{{ sortie.nbInscriptionsMax }}</p>
+            <br>
+            <p class="labelSortie">Durée :</p>
+            <p class="infosSortie">{{ sortie.duree }} minutes</p>
+            <br>
+            <p class="labeldescription">Description et infos :</p>
+            <p class="infosSortie description">{{ sortie.infosSortie }}</p>
+        </div>
+
+        <div id="droiteDetails">
+            <p class="labelSortieDroite">Campus :</p>
+            <p class="infosSortie">{{ sortie.campus.nom }}</p>
+            <br>
+            <p class="labelSortieDroite">Lieu :</p>
+            <p class="infosSortie">{{ sortie.lieu.nom }}</p>
+            <br>
+            <p class="labelSortieDroite">Rue :</p>
+            <p class="infosSortie">{{ sortie.lieu.rue}}</p>
+            <br>
+            <p class="labelSortieDroite">Code postal :</p>
+            <p class="infosSortie">{{ sortie.lieu.ville.codePostal}}</p>
+            <br>
+            <p class="labelSortieDroite">Latitude :</p>
+            <p class="infosSortie">{{ sortie.lieu.latitude}}</p>
+            <br>
+            <p class="labelSortieDroite">Longitude :</p>
+            <p class="infosSortie">{{ sortie.lieu.longitude}}</p>
+
+            {% if sortie.participants is empty %}
+            <div id="listeParticipants">
+                <h3>Aucun participants inscrits</h3>
+            </div>
+            {% endif %}
+            {% if sortie.participants is not empty %}
+
+            <div id="listeParticipants">
+                <h3>Liste des participants inscrits</h3>
+
+
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Pseudo</th>
+                            <th>Nom</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for participant in sortie.participants %}
+                        <tr>
+                            <td class="pseudo">{{ participant.pseudo }}</td>
+                            <td class="nom">{{ participant.prenom }} {{ participant.nom }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
