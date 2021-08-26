@@ -125,7 +125,7 @@
                         and sortie.etat.libelle != "En Cours"
                         and app.user.id == sortie.organisateur.id
                     %}
-                        - <a href="#">Annuler</a>
+                        - <a href="{{url('sortie_annuler', {"id": sortie.id }) }}">Annuler</a>
                     {% endif %}
 
                 </p>

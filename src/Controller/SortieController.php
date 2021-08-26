@@ -172,6 +172,32 @@ class SortieController extends AbstractController
     }
 
     /**
+     * @Route("/annuler-{id}", name="annuler", requirements={"id": "\d+"}, methods={"GET", "POST"})
+     */
+    public function annuler(Request $request): Response
+    {
+
+        // Récupération de l'objet sortie
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->findOneBy( ['id'=> $request->get('id')] );
+
+        if ( ($sortie->getOrganisateur() != $this->getUser()) ){
+            $this->addFlash('alert', 'Héhé.. On y a pensé avant toi!');
+            return $this->redirectToRoute('default_home');
+        }
+
+        if ( ($sortie->getEtat()->getLibelle() != 'Créée') ||
+            ($sortie->getEtat()->getLibelle() != 'Ouverte') ||
+            ($sortie->getEtat()->getLibelle() != 'Clôturée') ){
+
+            // Redirection
+            $this->addFlash('alert', 'Annuler, c\'est tricher !');
+            return $this->redirectToRoute('default_home');
+        }
+        return $this->redirectToRoute('default_home');
+    }
+
+    /**
      * @Route("/inscription", name="inscription", requirements={"id": "\d+"})
      */
     public function inscription(Request $request, EntityManagerInterface $entityManager): Response
