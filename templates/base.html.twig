@@ -67,7 +67,17 @@
     </header>
 
 
-    {% block main %}{% endblock main %}
+    {% block main %}
+
+        {% for group, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ group }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+    {% endblock main %}
     <footer>
     </footer>
 

@@ -49,6 +49,12 @@ class SortieController extends AbstractController
             $etat= $etatRepository->findOneBy(['libelle'=>'Créée']);
             $sortie->setEtat($etat);
 
+            if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
+
+                $this->addFlash('alert', 'Les inscriptions doivent se terminer avant la sortie.');
+                return $this->redirectToRoute('sortie_organiser');
+            }
+
             $em->persist($sortie);
             $em->flush();
 
