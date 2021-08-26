@@ -1,0 +1,8 @@
+{# templates/bundles/TwigBundle/Exception/error.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>{{ status_text }}</h1>
+
+    <p>{{ status_code }}</p>
+{% endblock %}
