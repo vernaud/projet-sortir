@@ -103,7 +103,9 @@ class SortieController extends AbstractController
             if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
 
                 $this->addFlash('alert', 'Les inscriptions doivent se terminer avant la sortie.');
-                return $this->redirectToRoute('sortie_organiser');
+                return $this->redirectToRoute('sortie_edit', [
+                    'id'=>$sortie->getId()
+                ]);
             }
 
             $em->persist($sortie);
