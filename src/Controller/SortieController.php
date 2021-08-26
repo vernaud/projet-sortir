@@ -148,6 +148,7 @@ class SortieController extends AbstractController
 
 //        $this->isValidEtatOrganisateur($sortie);
         if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
+            $this->addFlash('alert', 'Héhé.. On y a pensé avant toi!');
             return $this->redirectToRoute('default_home');
         }
 
@@ -165,6 +166,7 @@ class SortieController extends AbstractController
 
 
         // Redirection
+        $this->addFlash('success', 'La sortie est ouverte aux inscriptions.');
         return $this->redirectToRoute('default_home');
     }
 
