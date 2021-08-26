@@ -26,7 +26,11 @@ class SortieRepository extends ServiceEntityRepository
     {
 
         $queryBuilder = $this->createQueryBuilder('s');
-        $queryBuilder->addOrderBy('s.dateHeureDebut','DESC');
+        $queryBuilder
+            ->select('s','p','e')
+            ->leftJoin('s.participants','p')
+            ->leftJoin('s.etat', 'e')
+            ->addOrderBy('s.dateHeureDebut', 'DESC');
 
         if (!empty($filtres['campus']) ) {
             $queryBuilder
@@ -54,16 +58,13 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('o', $participant);
         }
 
-        if (!empty($filtres['sortieInscrit']) ) {
-            // todo requête inscrit
-            /*$queryBuilder
-                ->andWhere()
-                ->setParameter();*/
+        /*if (!empty($filtres['sortieInscrit']) ) {
+
         }
 
         if (!empty($filtres['sortiePasInscrit']) ) {
-            // todo requête non inscrit
-        }
+
+        }*/
 
         if (!empty($filtres['sortiePassees']) ) {
             $queryBuilder
@@ -92,7 +93,12 @@ class SortieRepository extends ServiceEntityRepository
     public function findAllSorties()
     {
         $queryBuilder = $this->createQueryBuilder('s');
-        $queryBuilder->addOrderBy('s.dateHeureDebut', 'DESC');
+        $queryBuilder
+            ->select('s','p','e')
+            ->leftJoin('s.participants','p')
+            ->leftJoin('s.etat', 'e')
+            ->addOrderBy('s.dateHeureDebut', 'DESC');
+
         $query = $queryBuilder->getQuery();
 
         $results = $query->getResult();

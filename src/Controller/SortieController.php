@@ -251,7 +251,7 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('default_home');
     }
 
-    public function isValidEtatOrganisateur(Request $request, $sortie) :Response
+    /*public function isValidEtatOrganisateur(Request $request, $sortie) :Response
     {
         dump($sortie);
         dump($sortie->getEtat()->getLibelle());
@@ -261,5 +261,5 @@ class SortieController extends AbstractController
         if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisteur() != $this->getUser()) ){
             return $this->redirectToRoute('default_home');
         }
-    }
+    }*/
 }
