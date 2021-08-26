@@ -121,9 +121,9 @@ class AppFixtures extends Fixture
         /* ************ SORTIE ************ */
         $sortie = new Sortie();
         $sortie->setNom('Philo');
-        $sortie->setDateHeureDebut(new \DateTime("2018-07-19 23:45:00"));
+        $sortie->setDateHeureDebut(new \DateTime("2021-09-19 23:45:00"));
         $sortie->setDuree(90);
-        $sortie->setDateLimiteInscription(new \DateTime('2018-07-19'));
+        $sortie->setDateLimiteInscription(new \DateTime('2021-09-15'));
         $sortie->setNbInscriptionsMax(8);
         $sortie->setInfosSortie('Infos de la sortie 1');
         $sortie->setEtat($etat1);
@@ -134,12 +134,12 @@ class AppFixtures extends Fixture
 
         $sortie = new Sortie();
         $sortie->setNom('Origamie');
-        $sortie->setDateHeureDebut(new \DateTime('2018-07-21 20:00:00'));
+        $sortie->setDateHeureDebut(new \DateTime('2021-09-21 20:00:00'));
         $sortie->setDuree(90);
-        $sortie->setDateLimiteInscription(new \DateTime('2018-07-19'));
+        $sortie->setDateLimiteInscription(new \DateTime('2021-09-15'));
         $sortie->setNbInscriptionsMax(5);
         $sortie->setInfosSortie('Infos de la sortie 2');
-        $sortie->setEtat($etat1);
+        $sortie->setEtat($etat2);
         $sortie->setCampus($campus);
         $sortie->setLieu($lieu);
         $sortie->setOrganisateur($participant2);
@@ -147,12 +147,54 @@ class AppFixtures extends Fixture
 
         $sortie = new Sortie();
         $sortie->setNom('Perles');
-        $sortie->setDateHeureDebut(new \DateTime('2018-07-21 20:00:00'));
+        $sortie->setDateHeureDebut(new \DateTime('2021-09-21 20:00:00'));
         $sortie->setDuree(90);
-        $sortie->setDateLimiteInscription(new \DateTime('2018-07-19'));
+        $sortie->setDateLimiteInscription(new \DateTime('2021-09-15'));
         $sortie->setNbInscriptionsMax(12);
         $sortie->setInfosSortie('Infos de la sortie 3');
-        $sortie->setEtat($etat1);
+        $sortie->setEtat($etat3);
+        $sortie->setCampus($campus);
+        $sortie->setLieu($lieu);
+        $sortie->setOrganisateur($participant2);
+        $sortie->addParticipant($participant1);
+        $sortie->addParticipant($participant2);
+        $manager->persist($sortie);
+
+        /* ************ SORTIE ************ */
+        $sortie = new Sortie();
+        $sortie->setNom('Philo');
+        $sortie->setDateHeureDebut(new \DateTime("2021-09-19 23:45:00"));
+        $sortie->setDuree(90);
+        $sortie->setDateLimiteInscription(new \DateTime('2021-09-15'));
+        $sortie->setNbInscriptionsMax(8);
+        $sortie->setInfosSortie('Infos de la sortie 4');
+        $sortie->setEtat($etat4);
+        $sortie->setCampus($campus);
+        $sortie->setLieu($lieu);
+        $sortie->setOrganisateur($participant1);
+        $manager->persist($sortie);
+
+        $sortie = new Sortie();
+        $sortie->setNom('Origamie');
+        $sortie->setDateHeureDebut(new \DateTime('2021-08-21 20:00:00'));
+        $sortie->setDuree(90);
+        $sortie->setDateLimiteInscription(new \DateTime('2021-08-20'));
+        $sortie->setNbInscriptionsMax(8);
+        $sortie->setInfosSortie('Infos de la sortie 5');
+        $sortie->setEtat($etat5);
+        $sortie->setCampus($campus);
+        $sortie->setLieu($lieu);
+        $sortie->setOrganisateur($participant2);
+        $manager->persist($sortie);
+
+        $sortie = new Sortie();
+        $sortie->setNom('Perles');
+        $sortie->setDateHeureDebut(new \DateTime('2021-09-21 20:00:00'));
+        $sortie->setDuree(90);
+        $sortie->setDateLimiteInscription(new \DateTime('2021-09-15'));
+        $sortie->setNbInscriptionsMax(12);
+        $sortie->setInfosSortie('Infos de la sortie 6');
+        $sortie->setEtat($etat6);
         $sortie->setCampus($campus);
         $sortie->setLieu($lieu);
         $sortie->setOrganisateur($participant2);

@@ -82,7 +82,7 @@
                 <p class="contenuColonne etat"> {{ sortie.etat.libelle }} </p>
                 <p class="contenuColonne inscrit">
                     {% if app.user in sortie.participants %}
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-check-circle check"></i>
                     {% endif %}
                 </p>
                 <p class="contenuColonne"> {{ sortie.organisateur.pseudo }} </p>

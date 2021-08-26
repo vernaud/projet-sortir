@@ -11,7 +11,7 @@
 }
 
 .iconProfil {
-    color: #1e4b6d;
+    color: #5B077B;
     margin-left:20px;
     font-size: 22px;
     width:19px;
@@ -22,11 +22,12 @@
     display:grid;
     grid-template-columns: repeat(2, 370px 400px);
     padding:20px 50px 50px 50px;
+    color: #102e45;
 }
 
 #contentFormulaire h4 {
     font-family: TravisZone, sans-serif;
-    color: #1e4b6d;
+    color: #5B077B;
     letter-spacing: 3px;
     font-size: 28px;
     text-align: left;
@@ -81,7 +82,7 @@
 .iconRecherche {
     display: inline-block;
     margin-left: -25px;
-    color:#1e4b6d;
+    color:#5B077B;
 }
 
 #recherche_dateUn, #recherche_dateDeux {
@@ -106,7 +107,7 @@ input[type=checkbox] {
     height: 15px;
     width: 15px;
     background: #fff;
-    border: 2px solid #034758;
+    border: 2px solid #5B077B;
     cursor: pointer;
     position: absolute;
     margin-left: -15px;
@@ -116,7 +117,7 @@ input[type=checkbox] {
 
 input[type="checkbox"]:checked {
     color: #FFF;
-    background-color: #034758;
+    background-color: #5B077B;
 }
 
 input[type="checkbox"]:checked:before {
@@ -142,8 +143,8 @@ input[type="checkbox"]:disabled {
 
 .boutonRechercher {
     border:none;
-    background-color: #1e4b6d;
-    color: #FFFFFF;
+    background-color: #5B077B;
+    color: #F7F7F7;
     padding: 5px;
     position: absolute;
     border-radius: 5px;
@@ -158,8 +159,8 @@ input[type="checkbox"]:disabled {
 }
 
 .boutonRechercher:hover{
-    background-color: #FFFFFF;
-    color: #1e4b6d;
+    background-color: #F7F7F7;
+    color: #5B077B;
     transition-duration: 0.5s;
 }
 
@@ -203,8 +204,8 @@ input[type="checkbox"]:disabled {
 }
 
 #btnAjouterSortie {
-    background-color: #1e4b6d;
-    color: #FFFFFF;
+    background-color: #5B077B;
+    color: #F7F7F7;
     padding:10px;
     border-radius: 5px;
     text-decoration: none;
@@ -215,8 +216,8 @@ input[type="checkbox"]:disabled {
 }
 
 #btnAjouterSortie:hover {
-    color: #1e4b6d;
-    background-color: #FFFFFF;
+    color: #5B077B;
+    background-color: #F7F7F7;
     transition-duration: 0.5s;
 }
 
@@ -224,6 +225,10 @@ input[type="checkbox"]:disabled {
     color: #1e4b6d;
     text-decoration: none;
     font-weight: bold;
+}
+
+.check{
+    color: #5B077B;
 }
 
 #recherche_campus {
@@ -238,7 +243,7 @@ input[type="checkbox"]:disabled {
     margin-left:-22px;
     width: 0; height: 0;
     border-color: transparent;
-    border-top-color: #1e4b6d;
+    border-top-color: #5B077B;
     border-width: 6px;
     border-style: solid;
     pointer-events: none;

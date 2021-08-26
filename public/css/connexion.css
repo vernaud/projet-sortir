@@ -15,7 +15,7 @@
 }
 
 #socialIconConnexion i {
-    color: #1e4b6d;
+    color: #5B077B;
     font-size: 30px;
     cursor: pointer;
     margin:6px;
@@ -29,7 +29,7 @@
 h1 {
     font-family: TravisZone, tahoma, arial, serif;
     letter-spacing: 2px;
-    color: #1e4b6d;
+    color: #5B077B;
 }
 
 #contentFormConnexion {
@@ -62,7 +62,7 @@ input[type=checkbox] {
     height: 15px;
     width: 15px;
     background: #fff;
-    border: 2px solid #034758;
+    border: 2px solid #5B077B;
     cursor: pointer;
     position: absolute;
     margin-left: -15px;
@@ -72,7 +72,7 @@ input[type=checkbox] {
 
 input[type="checkbox"]:checked {
     color: #FFF;
-    background-color: #034758;
+    background-color: #5B077B;
 }
 
 input[type="checkbox"]:checked:before {
@@ -97,9 +97,9 @@ input[type="checkbox"]:disabled {
 }
 
 #btnConnexion {
-    background-color: #1e4b6d;
+    background-color: #5B077B;
     border: none;
-    color: #FFFFFF;
+    color: #F7F7F7;
     padding:5px;
     font-family: QuicksandBook, serif;
     font-size:18px;
@@ -111,7 +111,7 @@ input[type="checkbox"]:disabled {
 
 #btnConnexion:hover {
     background-color: #FFFFFF;
-    color: #1e4b6d;
+    color: #F7F7F7;
 }
 
 .alert {
@@ -124,7 +124,7 @@ input[type="checkbox"]:disabled {
 }
 
 #connecte a {
-    background-color: #1e4b6d;
+    background-color: #5B077B;
     border: none;
     color: #FFFFFF;
     padding:6px;
@@ -132,9 +132,10 @@ input[type="checkbox"]:disabled {
     transition-duration: 0.5s;
     border-radius:5px;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
 #connecte a:hover {
     background-color: #FFFFFF;
-    color: #1e4b6d;
+    color: #5B077B;
 }
