@@ -58,6 +58,7 @@ class SortieController extends AbstractController
             $em->persist($sortie);
             $em->flush();
 
+            $this->addFlash('success', 'La sortie est enregistrée.');
             return $this->redirectToRoute('default_home');
         }
 
@@ -107,6 +108,7 @@ class SortieController extends AbstractController
             $em->persist($sortie);
             $em->flush();
 
+            $this->addFlash('success', 'La sortie est mise à jour.');
             return $this->redirectToRoute('default_home');
         }
 
