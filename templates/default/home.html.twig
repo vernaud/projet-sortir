@@ -14,9 +14,9 @@
                 <p id="userProfil"><span>{{ app.user.pseudo }}</span><i class="fas fa-user-alt iconProfil"></i></p>
                 {% endif %}
             </div>
+            <h4>Filtrer les sorties</h4>
             {{ form_start(formRecherche) }}
             <div id="contentFormulaire">
-                <h4>Filtrer les sorties</h4>
                 <div id="colGauche">
                     <div id="campus">
                         <div id="labelCampus">{{ form_label(formRecherche.campus) }}</div>
@@ -54,9 +54,6 @@
                         'attr': {'class':'boutonRechercher'}
                     }) }}
                 </div>
-
-
-
             </div>
 
             {{ form_end(formRecherche) }}
@@ -65,70 +62,60 @@
 
 
     <div id="contentList">
-        <div id="titles">
-            <p class="titleList" id="titleUn">Nom de la sortie</p>
-            <p class="titleList" id="titleDeux">Date de la sortie</p>
-            <p class="titleList" id="titleTrois">Clôture</p>
-            <p class="titleList inscritMax" id="titleQuatre">Inscrits/Places</p>
-            <p class="titleList etat" id="titleCinq">Etat</p>
-            <p class="titleList inscrit" id="titleSix">Inscrit</p>
-            <p class="titleList" id="titleSept">Organisateur</p>
-            <p class="titleList action" id="titleHuit">Actions</p>
-        </div>
         <div id="content">
             {% for sortie in sorties %}
-                <p class="contenuColonne">{{ sortie.nom }}</p>
-                <p class="contenuColonne">{{ sortie.dateHeureDebut|date('d/m/Y H') }}h{{ sortie.dateHeureDebut|date('i') }}</p>
-                <p class="contenuColonne">{{ sortie.dateLimiteInscription|date('d/m/Y') }}</p>
-                <p class="contenuColonne inscritMax">{{ sortie.participants|length }} / {{ sortie.nbInscriptionsMax }}</p>
-                <p class="contenuColonne etat"> {{ sortie.etat.libelle }} </p>
-                <p class="contenuColonne inscrit">
-                    {% if app.user in sortie.participants %}
-                        <i class="fas fa-check-circle check"></i>
-                    {% endif %}
-                </p>
-                <p class="contenuColonne"> {{ sortie.organisateur.pseudo }} </p>
-                <p class="contenuColonne action">
-                    <a class="zoombox" href="{{url('sortie_afficher', {"id": sortie.id }) }}">Afficher</a>
 
-                    {% if date(sortie.dateLimiteInscription) > date()
-                        and sortie.etat.libelle == "Ouverte"
-                        and app.user not in sortie.participants
-                        and app.user.id != sortie.organisateur.id
-                    %}
-                        - <a href="{{ path('sortie_inscription', {id: sortie.id}) }}">S'inscrire</a>
-                    {% endif %}
+                <div class="content-cards">
+                    <div class="nom">{{ sortie.nom }}</div>
+                    <div class="infos">
+                        <div class="date">
+                            <p><i class="far fa-calendar-alt iconDate"></i> <span class="alignement">Le {{ sortie.dateHeureDebut|date('d/m/Y') }} à {{ sortie.dateHeureDebut|date('H') }}h{{ sortie.dateHeureDebut|date('i') }}</span></p>
+                        </div>
+                        <div class="organisateur">
+                            <p><i class="fas fa-user iconOrganisateur"></i> <span class="alignement">Organnisée par {{ sortie.organisateur.pseudo }}</span></p>
+                        </div>
+                        <div class="inscrits">
+                            <p><i class="fas fa-users iconInscrits"></i> <span class="alignementInscrits">{{ sortie.participants|length }} / {{ sortie.nbInscriptionsMax }}</span></p>
+                        </div>
+                        <div class="etat">
+                            <p><i class="fas fa-cogs iconInscrits"></i> <span class="alignementEtat">{{ sortie.etat.libelle }}</span></p>
+                        </div>
+                    </div>
 
-
-                    {% if app.user in sortie.participants
-                        and app.user.id != sortie.organisateur.id
-                        and date(sortie.dateLimiteInscription) > date()
-                        and sortie.etat.libelle != "Annulée"
-                        and sortie.etat.libelle != "En Cours"
-                    %}
-                        - <a href="{{ path('sortie_desistement', {id: sortie.id}) }}">Se désister</a>
-                    {% endif %}
-
-
-
-                    {% if app.user.id == sortie.organisateur.id
-                        and sortie.etat.libelle == "Créée"
-                    %}
-                        - <a href="{{url('sortie_edit', {"id": sortie.id }) }}">Modifier</a>
-                        - <a href="{{url('sortie_publier', {"id": sortie.id }) }}">Publier</a>
-                    {% endif %}
-
-
-
-                    {% if sortie.etat.libelle != "Annulée"
-                        and sortie.etat.libelle != "Passée"
-                        and sortie.etat.libelle != "En Cours"
-                        and app.user.id == sortie.organisateur.id
-                    %}
-                        - <a href="#">Annuler</a>
-                    {% endif %}
-
-                </p>
+                    <div class="boutons">
+                        {% if date(sortie.dateLimiteInscription) > date()
+                            and sortie.etat.libelle == "Ouverte"
+                            and app.user not in sortie.participants
+                            and app.user.id != sortie.organisateur.id
+                        %}
+                                <a href="{{ path('sortie_inscription', {id: sortie.id}) }}"><i class="fas fa-user-plus iconInscrire"></i> <span class="alignementBoutons">S'inscrire</span></a>
+                        {% endif %}
+                        {% if app.user in sortie.participants
+                            and app.user.id != sortie.organisateur.id
+                            and date(sortie.dateLimiteInscription) > date()
+                            and sortie.etat.libelle != "Annulée"
+                            and sortie.etat.libelle != "En Cours"
+                        %}
+                                <a href="{{ path('sortie_desistement', {id: sortie.id}) }}"><i class="fas fa-user-times iconDesistement"></i> <span class="alignementBoutons">Se désister</span></a>
+                        {% endif %}
+                            <a href="{{url('sortie_afficher', {"id": sortie.id }) }}"> <i class="fas fa-plus-square iconInfos"></i> <span class="alignementBoutons">Plus d'infos</span></a>
+                    </div>
+                    <div class="btnOrganisateur">
+                        {% if app.user.id == sortie.organisateur.id
+                            and sortie.etat.libelle == "Créée"
+                        %}
+                            <a class="lienOrganisateur" href="{{url('sortie_edit', {"id": sortie.id }) }}">Modifier</a>
+                            <a class="lienOrganisateur" href="{{url('sortie_publier', {"id": sortie.id }) }}">Publier</a>
+                        {% endif %}
+                        {% if sortie.etat.libelle != "Annulée"
+                            and sortie.etat.libelle != "Passée"
+                            and sortie.etat.libelle != "En Cours"
+                            and app.user.id == sortie.organisateur.id
+                        %}
+                            <a class="lienOrganisateur" href="#">Annuler</a>
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
         </div>
 

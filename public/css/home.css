@@ -23,15 +23,18 @@
     grid-template-columns: repeat(2, 370px 400px);
     padding:20px 50px 50px 50px;
     color: #102e45;
+    width:820px;
+    margin:auto;
 }
 
-#contentFormulaire h4 {
+h4 {
     font-family: TravisZone, sans-serif;
     color: #5B077B;
     letter-spacing: 3px;
     font-size: 28px;
-    text-align: left;
-    margin-bottom:50px;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: -120px;
 }
 
 #colGauche {
@@ -176,18 +179,125 @@ input[type="checkbox"]:disabled {
 }
 
 #contentList {
-    background-color: #FFFFFF;
+    background-color: #F7F7F7;
     color: #1e4b6d;
     width: 100%;
-    padding:50px;
+    padding:25px 0;
     text-align: left;
     margin-bottom: 20px;
 }
 
-#titles, #content {
+.content-cards{
+    width:350px;
+    margin:20px;
+    background-color: rgba(230, 237, 241, 0.8);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 0 10px rgba(16, 46, 69, 0.21);
+    transition-duration: 0.5s;
+}
+
+.content-cards:hover{
+    box-shadow: 0 0 10px rgba(16, 46, 69, 0.45);
+    cursor:pointer;
+}
+
+.content-cards:hover .boutons a, .content-cards:hover .iconInfos,
+.content-cards:hover .iconInscrire, .content-cards:hover .iconDesistementn{
+    color: rgb(91, 7, 123);
+    transition-duration: 0.5s;
+}
+
+.content-cards:hover .lienOrganisateur {
+    background-color: rgb(17, 165, 207);
+    color: rgb(247, 247, 247);
+}
+
+.nom {
+    background-color: #11a5cf;
+    font-family: TravisZone, tahoma, arial, serif;
+    color: #F7F7F7;
+    font-size: 22px;
+    padding:3px;
+    letter-spacing: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.infos {
+    text-align: left;
+    margin:20px;
+}
+
+.iconDate, .iconOrganisateur{
+    color: #5B077B;
+    font-size: 24px;
+    margin-right:10px;
+}
+
+.iconInfos, .iconInscrire, .iconDesistementn  {
+    color: rgba(91, 7, 123, 0);
+    font-size: 24px;
+    margin-right:10px;
+    transition-duration: 0.5s;
+}
+
+.iconInscrits {
+    font-size: 18px;
+    margin-right:10px;
+    color: #5B077B;
+}
+
+.alignement {
+    position: absolute;
+    line-height: 25px;
+}
+
+.alignementInscrits, .alignementEtat {
+    position: absolute;
+    line-height: 18px;
+}
+
+.organisateur, .inscrits, .etat {
+    margin-top:20px;
+}
+
+#content {
     display: grid;
-    grid-template-columns: 200px 200px 200px 160px 200px 100px 160px 600px;
-    /*grid-template-columns: auto auto auto auto auto auto auto auto;*/
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    max-width:1580px;
+    margin: auto;
+    transition-duration: 0.5s;
+}
+
+.boutons {
+    margin-top:70px;
+}
+
+.boutons a {
+    color: rgba(91, 7, 123, 0);
+    text-decoration: none;
+    margin:10px;
+    transition-duration: 0.5s;
+}
+
+.iconInscrire, .iconDesistement, .iconInfos {
+    font-size: 22px;
+}
+
+.btnOrganisateur {
+    margin:20px;
+}
+
+.lienOrganisateur {
+    background-color: rgba(17, 165, 207, 0);
+    color: rgba(247, 247, 247, 0);
+    padding:5px;
+    text-decoration: none;
+    border-radius:5px;
+    cursor:pointer;
+    transition-duration: 0.5s;
 }
 
 #titleUn {
@@ -253,18 +363,18 @@ input[type="checkbox"]:disabled {
     background-color: #B0413E;
     color: #FFFFFF;
     padding: 5px;
-    width: 380px;
-    margin: auto auto 20px;
-    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    top:196px;
 }
 
 .alert.success {
-    background-color: #BAB847;
+    background-color: #939200;
     color: #FFFFFF;
     padding: 5px;
-    width: 380px;
-    margin: auto auto 20px;
-    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    top:196px;
 }
 
 /*soon*/
@@ -274,4 +384,72 @@ input[type="checkbox"]:disabled {
     content: " (soon)";
     color: white;
     font-style: italic;
+}
+
+@media screen and (min-width: 1221px) and (max-width: 1570px) {
+
+    #content {
+        grid-template-columns: repeat(3, 1fr);
+        max-width:1280px;
+    }
+
+}
+
+@media screen and (min-width: 1051px) and (max-width: 1220px) {
+
+    #content {
+        grid-template-columns: repeat(2, 1fr);
+        max-width:800px;
+    }
+
+}
+
+@media screen and (min-width: 841px) and (max-width: 1050px) {
+
+    #infoJour {
+        color: rgba(255, 255, 255, 0);
+    }
+
+    .iconProfil {
+        color: rgba(91, 7, 123, 0);
+    }
+
+    #content {
+        grid-template-columns: repeat(2, 1fr);
+        max-width:800px;
+    }
+
+}
+
+@media screen and (min-width: 0px) and (max-width: 840px) {
+
+    #infoJour {
+        color: rgba(255, 255, 255, 0);
+    }
+
+    .iconProfil {
+        color: rgba(91, 7, 123, 0);
+    }
+
+    #content {
+        grid-template-columns: repeat(1, 1fr);
+        max-width:430px;
+    }
+
+    #contentFormulaire {
+        display: none;
+    }
+
+    h4 {
+        color: rgba(91, 7, 123, 0);
+    }
+
+    .alert.alert {
+        top:0;
+    }
+
+    .alert.success {
+        top:0;
+    }
+
 }

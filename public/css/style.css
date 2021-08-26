@@ -212,7 +212,7 @@ input[type="checkbox"]#burger:checked ~ label .bar3 {
     display: none;
 }
 
-@media screen and (min-width: 0px) and (max-width: 1050px) {
+@media screen and (min-width: 0px) and (max-width: 1080px) {
 
     #wrapper {
         display: inline;
