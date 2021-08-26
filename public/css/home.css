@@ -263,13 +263,10 @@ input[type="checkbox"]:disabled {
 }
 
 /*soon*/
-#colCentre :nth-child(6),
-#colCentre :nth-child(10){
-    color: white;
-}
 
 #colCentre :nth-child(6):after,
 #colCentre :nth-child(10):after{
-    content: " soon";
+    content: " (soon)";
+    color: white;
     font-style: italic;
 }
