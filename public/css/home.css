@@ -261,3 +261,15 @@ input[type="checkbox"]:disabled {
     margin: auto auto 20px;
     border-radius: 5px;
 }
+
+/*soon*/
+#colCentre :nth-child(6),
+#colCentre :nth-child(10){
+    color: white;
+}
+
+#colCentre :nth-child(6):after,
+#colCentre :nth-child(10):after{
+    content: " soon";
+    font-style: italic;
+}
