@@ -4,7 +4,9 @@
 {% block style %}<link rel="stylesheet" href="{{ asset('css/organiser.css') }}">{% endblock style %}
 
 {% block main %}
+
     <h1>Organiser une sortie</h1>
+    {{ parent() }}
     {{ form_start(sortieForm) }}
     <div id="contentFormOrganiser">
         <div id="contentGrid">
