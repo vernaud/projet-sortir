@@ -36,7 +36,7 @@ class DefaultController extends AbstractController
 
         } else {
 
-            $sorties = $sortieRepository->findAll();
+            $sorties = $sortieRepository->findAllSorties();
 
         }
 

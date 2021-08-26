@@ -24,23 +24,9 @@ class SortieRepository extends ServiceEntityRepository
 
     public function defaultFind($filtres, $participant)
     {
-        /*$filtres = [
-            'campus'=>'object Campus',
-            'search'=>'string',
-            'dateUn'=> dateTime'2021-08-19',
-            'dateDeux'=>dateTime'2021-08-20',
-            'sortieOrganisateur'=>'true',
-            'sortieInscrit'=>'true',
-            'sortiePasInscrit'=>'true',
-            'sortiePassees'=>'true'
-        ];*/
-
-        //debug
-        dump($filtres);
-
-
 
         $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder->addOrderBy('s.dateHeureDebut','DESC');
 
         if (!empty($filtres['campus']) ) {
             $queryBuilder
@@ -103,6 +89,14 @@ class SortieRepository extends ServiceEntityRepository
         return $req->getQuery()->getSingleResult();
     }
 
+    public function findAllSorties()
+    {
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder->addOrderBy('s.dateHeureDebut', 'DESC');
+        $query = $queryBuilder->getQuery();
 
+        $results = $query->getResult();
+        return $results;
+    }
 
 }
