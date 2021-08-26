@@ -49,9 +49,16 @@ class SortieController extends AbstractController
             $etat= $etatRepository->findOneBy(['libelle'=>'Créée']);
             $sortie->setEtat($etat);
 
+            if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
+
+                $this->addFlash('alert', 'Les inscriptions doivent se terminer avant la sortie.');
+                return $this->redirectToRoute('sortie_organiser');
+            }
+
             $em->persist($sortie);
             $em->flush();
 
+            $this->addFlash('success', 'La sortie est enregistrée.');
             return $this->redirectToRoute('default_home');
         }
 
@@ -75,6 +82,7 @@ class SortieController extends AbstractController
 //        $this->isValidEtatOrganisateur($sortie);
 
         if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
+            $this->addFlash('alert', 'Héhé.. On y a pensé avant toi!');
             return $this->redirectToRoute('default_home');
         }
 
@@ -92,9 +100,16 @@ class SortieController extends AbstractController
         if ($sortieForm->isSubmitted() ){
             $em = $this->getDoctrine()->getManager();
 
+            if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
+
+                $this->addFlash('alert', 'Les inscriptions doivent se terminer avant la sortie.');
+                return $this->redirectToRoute('sortie_organiser');
+            }
+
             $em->persist($sortie);
             $em->flush();
 
+            $this->addFlash('success', 'La sortie est mise à jour.');
             return $this->redirectToRoute('default_home');
         }
 
@@ -134,6 +149,7 @@ class SortieController extends AbstractController
 
 //        $this->isValidEtatOrganisateur($sortie);
         if ( ($sortie->getEtat()->getLibelle() != 'Créée') || ($sortie->getOrganisateur() != $this->getUser()) ){
+            $this->addFlash('alert', 'Héhé.. On y a pensé avant toi!');
             return $this->redirectToRoute('default_home');
         }
 
@@ -151,6 +167,7 @@ class SortieController extends AbstractController
 
 
         // Redirection
+        $this->addFlash('success', 'La sortie est ouverte aux inscriptions.');
         return $this->redirectToRoute('default_home');
     }
 

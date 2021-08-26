@@ -39,6 +39,7 @@ class ParticipantController extends AbstractController
 
             $entityManager->persist($participant);
             $entityManager->flush();
+            $this->addFlash('success', 'Vos informations sont mises à jour.');
             return $this->redirectToRoute('edit');
 
         }

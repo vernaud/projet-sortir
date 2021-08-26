@@ -248,3 +248,30 @@ input[type="checkbox"]:disabled {
     border-style: solid;
     pointer-events: none;
 }
+
+.alert.alert {
+    background-color: #B0413E;
+    color: #FFFFFF;
+    padding: 5px;
+    width: 380px;
+    margin: auto auto 20px;
+    border-radius: 5px;
+}
+
+.alert.success {
+    background-color: #BAB847;
+    color: #FFFFFF;
+    padding: 5px;
+    width: 380px;
+    margin: auto auto 20px;
+    border-radius: 5px;
+}
+
+/*soon*/
+
+#colCentre :nth-child(6):after,
+#colCentre :nth-child(10):after{
+    content: " (soon)";
+    color: white;
+    font-style: italic;
+}

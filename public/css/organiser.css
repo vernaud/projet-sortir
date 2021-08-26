@@ -200,3 +200,12 @@ input[type=number] {
 #iconMinute::after{
     margin-left: 220px;
 }
+
+.alert.alert {
+    background-color: #B0413E;
+    color: #FFFFFF;
+    padding: 5px;
+    width: 740px;
+    margin: auto auto 20px;
+    border-radius: 5px;
+}
