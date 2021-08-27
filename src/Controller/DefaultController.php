@@ -27,20 +27,9 @@ class DefaultController extends AbstractController
         $searchForm = $this->createForm(RechercheType::class);
         $searchForm->handleRequest($request);
 
-
-        if ($searchForm->isSubmitted()){
-
-            $filtres = $searchForm->getData();
-            $participant = $this->getUser();
-            $sorties = $sortieRepository->defaultFind($filtres, $participant);
-
-        } else {
-
-            $participant = $this->getUser();
-            $sorties = $sortieRepository->findAllSorties($participant);
-
-        }
-
+        $filtres = $searchForm->getData();
+        $participant = $this->getUser();
+        $sorties = $sortieRepository->defaultFind($filtres, $participant);
 
         return $this->render('default/home.html.twig', [
             "sorties" => $sorties,
