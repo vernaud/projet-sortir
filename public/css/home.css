@@ -253,12 +253,16 @@ input[type="checkbox"]:disabled {
     line-height: 25px;
 }
 
+.alignementInformation {
+    margin-top:10px;
+}
+
 .alignementInscrits, .alignementEtat {
     position: absolute;
     line-height: 18px;
 }
 
-.organisateur, .inscrits, .etat {
+.organisateur, .inscrits, .etat, .info {
     margin-top:20px;
 }
 

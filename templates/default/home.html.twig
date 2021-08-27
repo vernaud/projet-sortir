@@ -80,6 +80,9 @@
                         <div class="etat">
                             <p><i class="fas fa-cogs iconInscrits"></i> <span class="alignementEtat">{{ sortie.etat.libelle }}</span></p>
                         </div>
+                        <div class="info">
+                            <i class="fas fa-info-circle iconOrganisateur"></i> <p class="alignementInformation">{{ sortie.infosSortie }}</p>
+                        </div>
                     </div>
 
                     <div class="boutons">
@@ -110,6 +113,7 @@
                         {% if sortie.etat.libelle != "Annulée"
                             and sortie.etat.libelle != "Passée"
                             and sortie.etat.libelle != "En Cours"
+                            and sortie.etat.libelle != "Clôturée"
                             and app.user.id == sortie.organisateur.id
                         %}
                             <a class="lienOrganisateur" href="{{url('sortie_annuler', {"id": sortie.id }) }}">Annuler</a>

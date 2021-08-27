@@ -21,6 +21,7 @@ h1 {
     border-radius: 5px;
     text-align: left;
     color: #1e4b6d;
+    box-shadow: 0 0 10px rgba(16, 46, 69, 0.21);
 }
 
 .label {
