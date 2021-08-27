@@ -30,6 +30,9 @@ class SortieRepository extends ServiceEntityRepository
             ->select('s','p','e')
             ->leftJoin('s.participants','p')
             ->leftJoin('s.etat', 'e')
+            ->andWhere('NOT(e.libelle = :new AND s.organisateur != :org)')
+            ->setParameter('org', $participant)
+            ->setParameter('new', 'Créée')
             ->addOrderBy('s.dateHeureDebut', 'DESC');
 
         if (!empty($filtres['campus']) ) {
@@ -90,13 +93,17 @@ class SortieRepository extends ServiceEntityRepository
         return $req->getQuery()->getSingleResult();
     }
 
-    public function findAllSorties()
+    public function findAllSorties($participant)
     {
         $queryBuilder = $this->createQueryBuilder('s');
         $queryBuilder
             ->select('s','p','e')
             ->leftJoin('s.participants','p')
             ->leftJoin('s.etat', 'e')
+            ->andWhere('NOT(e.libelle = :new AND s.organisateur != :org)')
+            ->setParameter('org', $participant)
+            ->setParameter('new', 'Créée')
+
             ->addOrderBy('s.dateHeureDebut', 'DESC');
 
         $query = $queryBuilder->getQuery();

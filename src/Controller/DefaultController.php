@@ -36,7 +36,8 @@ class DefaultController extends AbstractController
 
         } else {
 
-            $sorties = $sortieRepository->findAllSorties();
+            $participant = $this->getUser();
+            $sorties = $sortieRepository->findAllSorties($participant);
 
         }
 
