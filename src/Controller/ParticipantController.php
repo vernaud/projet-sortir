@@ -21,7 +21,6 @@ class ParticipantController extends AbstractController
     {
         $partcipantRapository = $this->getDoctrine()->getRepository(Participant::class);
         $participant = $partcipantRapository->findOneBy( ['id'=>$this->getUser()] );
-        dump($participant);
         $oldPassword = $participant->getPassword();
         $participantForm = $this->createForm(ParticipantType::class, $participant);
         $participantForm->add('create', SubmitType::class, [

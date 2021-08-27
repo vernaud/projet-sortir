@@ -31,7 +31,6 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         if (!$user instanceof Participant) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
-        dump($newHashedPassword);exit();
 
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);

@@ -1,5 +1,7 @@
 {# templates/bundles/TwigBundle/Exception/error.html.twig #}
 {% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} - Erreur{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{{ asset('css/erreur.css') }}">{% endblock style %}
 
 {% block main %}
     <h1>{{ status_text }}</h1>

@@ -337,9 +337,7 @@ class AppFixtures extends Fixture
         $sortie5->setDateLimiteInscription(new \DateTime('2021-07-16'));
         $sortie5->setNbInscriptionsMax(5);
         $sortie5->setInfosSortie('Au travers de personnages tous plus ravagés les uns que les autres, et d’un stand up cyniquement jubilatoire, 
-        vous vous surprendrez à rire, à rire, et à rire encore de ses aventures auprès des enfants, des parents, mais aussi des chats et des zombies.
-        Si Elodie Poux passe près de chez vous, allez la voir ! Et comme beaucoup de spectateurs avant vous, vous repartirez en vous massant les zygomatiques, 
-        vous serez atteint du syndrome du Playmobil !');
+        vous vous surprendrez à rire, à rire, et à rire encore de ses aventures auprès des enfants, des parents, mais aussi des chats et des zombies.');
         $sortie5->setEtat($etat3);
         $sortie5->setCampus($campus3);
         $sortie5->setLieu($lieu7);
@@ -354,7 +352,7 @@ class AppFixtures extends Fixture
         $sortie6 = new Sortie();
         $sortie6->setNom('Aqua Jesus');
         $sortie6->setDateHeureDebut(new \DateTime("2021-09-11 16:00:00"));
-        $sortie6->setDuree(5);
+        $sortie6->setDuree(60);
         $sortie6->setDateLimiteInscription(new \DateTime('2021-09-05'));
         $sortie6->setNbInscriptionsMax(6);
         $sortie6->setInfosSortie('Concours : Marcher le plus longtemps possible sur l\'eau. Tout candidat qui finira noyé se verra exclure du classement final pour abandon.');
